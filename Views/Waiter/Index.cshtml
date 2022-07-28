@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.Waiter>
+
+@{
+    ViewBag.Title = "WaiterManagement";
+}
+
+<h2>WaiterManagement</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Wnick)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.wpassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isAdmin)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wnick)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WFullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.wpassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isAdmin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,31 @@
+﻿@model MVCRestaurant27Tem2022.Models.Waiter
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <div class="container">
+        <h2> Giris Formu</h2>
+        
+        <a>@ViewBag.Mesaj</a>
+        @using (Html.BeginForm("Login","Security",FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(m=>m.Wnick , new { @class ="form-control" , PlaceHolder = "Kullanıcı Adı"})
+                @*<input type="text" class="form-control" name="username" >*@
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(m => m.wpassword, new { @class = "form-control", PlaceHolder = "Parola" })
+            </div>
+            <button type="submit" id="Login" class=" btn btn-primary">login</button>
+        }
+      
+    </div>
+</body>
+</html>
