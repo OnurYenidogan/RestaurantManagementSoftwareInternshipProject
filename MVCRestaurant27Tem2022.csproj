@@ -239,6 +239,8 @@
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Waiter\Index.cshtml" />
     <Content Include="Views\Waiter\Create.cshtml" />
+    <Content Include="Views\fdType\Index.cshtml" />
+    <Content Include="Views\fdType\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
