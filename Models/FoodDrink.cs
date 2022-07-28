@@ -25,7 +25,7 @@ namespace MVCRestaurant27Tem2022.Models
         public string FDname { get; set; }
         public int id_type { get; set; }
         public decimal price { get; set; }
-        public byte[] onmenu { get; set; }
+        public bool onmenu { get; set; }
     
         public virtual fdType fdType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RestaurantDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RestaurantDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="id_bill" />
@@ -38,7 +38,7 @@
           <Property Name="FDname" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="id_type" Type="int" Nullable="false" />
           <Property Name="price" Type="smallmoney" Nullable="false" />
-          <Property Name="onmenu" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="onmenu" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PriceUpdates">
           <Key>
@@ -269,8 +269,7 @@
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -304,20 +303,7 @@
           </Key>
           <Property Name="id_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="typeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FoodDrink" Relationship="Self.FK__FoodDrink__id_ty__267ABA7A" FromRole="fdType" ToRole="FoodDrink" />
-        </EntityType>
-        <EntityType Name="FoodDrink">
-          <Key>
-            <PropertyRef Name="id_FD" />
-          </Key>
-          <Property Name="id_FD" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FDname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_type" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
-          <Property Name="onmenu" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
-          <NavigationProperty Name="fdType" Relationship="Self.FK__FoodDrink__id_ty__267ABA7A" FromRole="FoodDrink" ToRole="fdType" />
-          <NavigationProperty Name="PriceUpdates" Relationship="Self.FK__PriceUpda__id_FD__3C69FB99" FromRole="FoodDrink" ToRole="PriceUpdates" />
-          <NavigationProperty Name="ROrder" Relationship="Self.FK__ROrder__id_FD__37A5467C" FromRole="FoodDrink" ToRole="ROrder" />
+          <NavigationProperty Name="FoodDrink" Relationship="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A" FromRole="fdType" ToRole="FoodDrink" />
         </EntityType>
         <EntityType Name="PriceUpdates">
           <Key>
@@ -327,7 +313,7 @@
           <Property Name="id_FD" Type="Int64" Nullable="false" />
           <Property Name="lastPrice" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="pudatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="FoodDrink" Relationship="Self.FK__PriceUpda__id_FD__3C69FB99" FromRole="PriceUpdates" ToRole="FoodDrink" />
+          <NavigationProperty Name="FoodDrink" Relationship="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99" FromRole="PriceUpdates" ToRole="FoodDrink" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
@@ -351,8 +337,8 @@
           <Property Name="id_waiter" Type="Int32" Nullable="false" />
           <Property Name="odatetime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Bill" Relationship="Self.FK__ROrder__id_bill__38996AB5" FromRole="ROrder" ToRole="Bill" />
-          <NavigationProperty Name="FoodDrink" Relationship="Self.FK__ROrder__id_FD__37A5467C" FromRole="ROrder" ToRole="FoodDrink" />
           <NavigationProperty Name="Waiter" Relationship="Self.FK__ROrder__id_waite__398D8EEE" FromRole="ROrder" ToRole="Waiter" />
+          <NavigationProperty Name="FoodDrink" Relationship="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" FromRole="ROrder" ToRole="FoodDrink" />
         </EntityType>
         <EntityType Name="RTable">
           <Key>
@@ -446,42 +432,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FoodDrink__id_ty__267ABA7A">
-          <End Role="fdType" Type="Self.fdType" Multiplicity="1" />
-          <End Role="FoodDrink" Type="Self.FoodDrink" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fdType">
-              <PropertyRef Name="id_type" />
-            </Principal>
-            <Dependent Role="FoodDrink">
-              <PropertyRef Name="id_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PriceUpda__id_FD__3C69FB99">
-          <End Role="FoodDrink" Type="Self.FoodDrink" Multiplicity="1" />
-          <End Role="PriceUpdates" Type="Self.PriceUpdates" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FoodDrink">
-              <PropertyRef Name="id_FD" />
-            </Principal>
-            <Dependent Role="PriceUpdates">
-              <PropertyRef Name="id_FD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ROrder__id_FD__37A5467C">
-          <End Role="FoodDrink" Type="Self.FoodDrink" Multiplicity="1" />
-          <End Role="ROrder" Type="Self.ROrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FoodDrink">
-              <PropertyRef Name="id_FD" />
-            </Principal>
-            <Dependent Role="ROrder">
-              <PropertyRef Name="id_FD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Reservati__id_rt__2E1BDC42">
           <End Role="RTable" Type="Self.RTable" Multiplicity="1" />
           <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
@@ -510,7 +460,6 @@
           <EntitySet Name="Bill" EntityType="Self.Bill" />
           <EntitySet Name="Customer" EntityType="Self.Customer" />
           <EntitySet Name="fdType" EntityType="Self.fdType" />
-          <EntitySet Name="FoodDrink" EntityType="Self.FoodDrink" />
           <EntitySet Name="PriceUpdates" EntityType="Self.PriceUpdates" />
           <EntitySet Name="Reservation" EntityType="Self.Reservation" />
           <EntitySet Name="ROrder" EntityType="Self.ROrder" />
@@ -537,18 +486,6 @@
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
-          <AssociationSet Name="FK__FoodDrink__id_ty__267ABA7A" Association="Self.FK__FoodDrink__id_ty__267ABA7A">
-            <End Role="fdType" EntitySet="fdType" />
-            <End Role="FoodDrink" EntitySet="FoodDrink" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PriceUpda__id_FD__3C69FB99" Association="Self.FK__PriceUpda__id_FD__3C69FB99">
-            <End Role="FoodDrink" EntitySet="FoodDrink" />
-            <End Role="PriceUpdates" EntitySet="PriceUpdates" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROrder__id_FD__37A5467C" Association="Self.FK__ROrder__id_FD__37A5467C">
-            <End Role="FoodDrink" EntitySet="FoodDrink" />
-            <End Role="ROrder" EntitySet="ROrder" />
-          </AssociationSet>
           <AssociationSet Name="FK__Reservati__id_rt__2E1BDC42" Association="Self.FK__Reservati__id_rt__2E1BDC42">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Reservation" EntitySet="Reservation" />
@@ -557,8 +494,70 @@
             <End Role="Waiter" EntitySet="Waiter" />
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="FoodDrink" EntityType="RestaurantDBModel.FoodDrink" />
+          <AssociationSet Name="FK__FoodDrink__id_ty__267ABA7A" Association="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A">
+            <End Role="fdType" EntitySet="fdType" />
+            <End Role="FoodDrink" EntitySet="FoodDrink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PriceUpda__id_FD__3C69FB99" Association="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99">
+            <End Role="FoodDrink" EntitySet="FoodDrink" />
+            <End Role="PriceUpdates" EntitySet="PriceUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROrder__id_FD__37A5467C" Association="RestaurantDBModel.FK__ROrder__id_FD__37A5467C">
+            <End Role="FoodDrink" EntitySet="FoodDrink" />
+            <End Role="ROrder" EntitySet="ROrder" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="FoodDrink">
+          <Key>
+            <PropertyRef Name="id_FD" />
+          </Key>
+          <Property Name="id_FD" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FDname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_type" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="onmenu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="fdType" Relationship="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A" FromRole="FoodDrink" ToRole="fdType" />
+          <NavigationProperty Name="PriceUpdates" Relationship="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99" FromRole="FoodDrink" ToRole="PriceUpdates" />
+          <NavigationProperty Name="ROrder" Relationship="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" FromRole="FoodDrink" ToRole="ROrder" />
+        </EntityType>
+        <Association Name="FK__FoodDrink__id_ty__267ABA7A">
+          <End Type="RestaurantDBModel.fdType" Role="fdType" Multiplicity="1" />
+          <End Type="RestaurantDBModel.FoodDrink" Role="FoodDrink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fdType">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="FoodDrink">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PriceUpda__id_FD__3C69FB99">
+          <End Type="RestaurantDBModel.FoodDrink" Role="FoodDrink" Multiplicity="1" />
+          <End Type="RestaurantDBModel.PriceUpdates" Role="PriceUpdates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodDrink">
+              <PropertyRef Name="id_FD" />
+            </Principal>
+            <Dependent Role="PriceUpdates">
+              <PropertyRef Name="id_FD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROrder__id_FD__37A5467C">
+          <End Type="RestaurantDBModel.FoodDrink" Role="FoodDrink" Multiplicity="1" />
+          <End Type="RestaurantDBModel.ROrder" Role="ROrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodDrink">
+              <PropertyRef Name="id_FD" />
+            </Principal>
+            <Dependent Role="ROrder">
+              <PropertyRef Name="id_FD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -589,17 +588,6 @@
               <MappingFragment StoreEntitySet="fdType">
                 <ScalarProperty Name="id_type" ColumnName="id_type" />
                 <ScalarProperty Name="typeName" ColumnName="typeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FoodDrink">
-            <EntityTypeMapping TypeName="RestaurantDBModel.FoodDrink">
-              <MappingFragment StoreEntitySet="FoodDrink">
-                <ScalarProperty Name="id_FD" ColumnName="id_FD" />
-                <ScalarProperty Name="FDname" ColumnName="FDname" />
-                <ScalarProperty Name="id_type" ColumnName="id_type" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="onmenu" ColumnName="onmenu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -663,6 +651,17 @@
                 <ScalarProperty Name="WFullName" ColumnName="WFullName" />
                 <ScalarProperty Name="wpassword" ColumnName="wpassword" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodDrink">
+            <EntityTypeMapping TypeName="RestaurantDBModel.FoodDrink">
+              <MappingFragment StoreEntitySet="FoodDrink">
+                <ScalarProperty Name="onmenu" ColumnName="onmenu" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="FDname" ColumnName="FDname" />
+                <ScalarProperty Name="id_FD" ColumnName="id_FD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
