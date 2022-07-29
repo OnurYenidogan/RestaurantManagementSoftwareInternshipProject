@@ -16,7 +16,7 @@ namespace MVCRestaurant27Tem2022.Controllers
 
             return View();
         }
-
+        [Authorize(Users ="admin")]//bu sayfaya sadece admin adlı kullanıcı girebiliyor
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
