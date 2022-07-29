@@ -29,6 +29,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
+                    <li class="nav-item">
+                        @Html.ActionLink("Logged in as " + @User.Identity.Name, "", "", new { @class = "nav-link" })
+                    </li>
+
                     <li>@Html.ActionLink("Çıkış Yap", "Logout", "Security")</li>
 
                     }
