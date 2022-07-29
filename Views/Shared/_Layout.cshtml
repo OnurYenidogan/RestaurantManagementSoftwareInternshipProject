@@ -33,12 +33,12 @@
                         @Html.ActionLink("Logged in as " + @User.Identity.Name, "", "", new { @class = "nav-link" })
                     </li>
 
-                    <li>@Html.ActionLink("Çıkış Yap", "Logout", "Security")</li>
+                    <li>@Html.ActionLink("log out", "Logout", "Security")</li>
 
                     }
                     else
                     {
-                    <li>@Html.ActionLink("Giriş Yap", "Login", "Security")</li>
+                    <li>@Html.ActionLink("login", "Login", "Security")</li>
                     }
                 </ul>
             </div>
