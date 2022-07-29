@@ -10,11 +10,12 @@ namespace MVCRestaurant27Tem2022.Controllers
 
     public class HomeController : Controller
     {
+        RestaurantDBEntities db = new RestaurantDBEntities();
         [Authorize]
         public ActionResult Index()
         {
 
-            return View();
+            return View(db.RTable.ToList());
         }
         public ActionResult About()
         {

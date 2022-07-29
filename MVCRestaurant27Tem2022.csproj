@@ -235,12 +235,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\oldIndex.cshtml" />
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Waiter\Index.cshtml" />
     <Content Include="Views\Waiter\Create.cshtml" />
     <Content Include="Views\fdType\Index.cshtml" />
     <Content Include="Views\fdType\Create.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
