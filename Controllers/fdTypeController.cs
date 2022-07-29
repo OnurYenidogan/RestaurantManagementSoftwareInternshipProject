@@ -25,6 +25,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 db.fdType.Add(newfdType);
                 db.SaveChanges();
+                ViewBag.Mesaj = "successfully created";
             }
             return View();
         }
