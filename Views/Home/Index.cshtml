@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.RTable>
+<style>
+    .intro {
+        background-color: yellow;
+    }
+</style>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +14,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="intro">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.id_rtable)
@@ -26,7 +31,7 @@
             @Html.DisplayFor(modelItem => item.id_rtable)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tstatus , new { @class = "myCssClass" })
+            @Html.DisplayFor(modelItem => item.tstatus , new {style = "color:red"})
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -38,7 +43,7 @@
 
 </table>
 
-@for(var i = 10; i < 21; i++)
+@*@for(var i = 10; i < 21; i++)
 {
 <p>Line @i</p>
-}
+}*@
