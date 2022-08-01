@@ -14,7 +14,6 @@ namespace MVCRestaurant27Tem2022.Controllers
         [Authorize]
         public ActionResult Index()
         {
-
             return View(db.RTable.ToList());
         }
         public ActionResult About()

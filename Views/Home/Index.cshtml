@@ -15,13 +15,42 @@
         height: 100px;
         margin: 1%;
     }
+    .tableStatusFree {
+        border-radius: 10%;
+        background-color: greenyellow;
+        color: red;
+        float: left;
+        width: 10%;
+        padding: 10px;
+        height: 100px;
+        margin: 1%;
+    }
+    .tableStatusSeated {
+        border-radius: 10%;
+        background-color: rgb(42, 0, 181);
+        float: left;
+        width: 10%;
+        padding: 10px;
+        height: 100px;
+        margin: 1%;
+    }
+    .tableStatusReserved {
+        border-radius: 10%;
+        background-color: rgb(235, 158, 52);
+        color: red;
+        float: left;
+        width: 10%;
+        padding: 10px;
+        height: 100px;
+        margin: 1%;
+    }
 </style>
 
 @{
     ViewBag.Title = "Tables";
 }
 
-<h2>Index</h2>
+<h2>Table Status</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -31,26 +60,27 @@
 
     @foreach (var item in Model)
     {
-
-    <div class="tableStatus">
-        <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
-        @if (Convert.ToString(item.tstatus) == "f")
+        if (Convert.ToString(item.tstatus) == "f")
         {
-            @Html.ActionLink("Free", "Create")
+            <div class="tableStatusFree">
+                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                @Html.ActionLink("Free", "Create")
+            </div>
         }
         else if (Convert.ToString(item.tstatus) == "s")
         {
-            @Html.ActionLink("Seated", "Create")
+            <div class="tableStatusSeated">
+                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                @Html.ActionLink("Seated", "Create")
+            </div>
         }
         else
         {
-            @Html.ActionLink("Reserved", "Create")
+            <div class="tableStatusReserved">
+                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                @Html.ActionLink("Reserved", "Create")
+            </div>
         }
-
-        @*@Html.DisplayFor(modelItem => item.tstatus)*@
-    </div>
-
-
     }
 </div>
 
