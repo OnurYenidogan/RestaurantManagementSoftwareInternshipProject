@@ -4,7 +4,6 @@
         margin: 1%;
         float: right;
     }
-
     .tableStatus {
         border-radius: 10%;
         background-color: greenyellow;
@@ -42,8 +41,6 @@
         left: 0;
         z-index: 1;
     }
-
-
 </style>
 <div>
     @{ViewBag.Title = "Tables";}
@@ -57,7 +54,6 @@
         <div class="tableStatus tableStatusSeated tableStatusInfo">Seated</div>
         <div class="tableStatus tableStatusReserved tableStatusInfo">Reserved</div>
     </div>
-    
     <div class="tableStatusMain">
         @{int i = 0;}
         @foreach (var item in Model)
@@ -86,6 +82,3 @@
         }
     </div>
 </div>
-
-
-
