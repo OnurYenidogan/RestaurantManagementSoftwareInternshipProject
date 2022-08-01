@@ -2,6 +2,10 @@
 <style>
     .intro {
         background-color: yellow;
+        width : 90%;
+    }
+    .deneme {
+        color: red;
     }
 </style>
 
@@ -14,7 +18,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="intro">
+<table  width =50% >
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.id_rtable)
@@ -28,8 +32,8 @@
     @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id_rtable)
-        </td>
+            <a class="deneme" , href="#">@Html.DisplayFor(modelItem => item.id_rtable)</a>
+</td>
         <td>
             @Html.DisplayFor(modelItem => item.tstatus , new {style = "color:red"})
         </td>
