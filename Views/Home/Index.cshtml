@@ -2,6 +2,7 @@
 <style>
     .tableStatusMain {
         margin: 1%;
+        float: right;
     }
 
     .tableStatus {
@@ -33,7 +34,19 @@
 
     <div class="tableStatus">
         <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
-        @Html.ActionLink(Convert.ToString(item.tstatus) , "Create")
+        @if (Convert.ToString(item.tstatus) == "f")
+        {
+            @Html.ActionLink("Free", "Create")
+        }
+        else if (Convert.ToString(item.tstatus) == "s")
+        {
+            @Html.ActionLink("Seated", "Create")
+        }
+        else
+        {
+            @Html.ActionLink("Reserved", "Create")
+        }
+
         @*@Html.DisplayFor(modelItem => item.tstatus)*@
     </div>
 
