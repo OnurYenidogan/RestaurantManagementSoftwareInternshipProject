@@ -16,67 +16,41 @@
         margin: 1%;
     }
     .tableStatusFree {
-        border-radius: 10%;
         background-color: greenyellow;
-        color: red;
-        float: left;
-        width: 10%;
-        padding: 10px;
-        height: 100px;
-        margin: 1%;
     }
     .tableStatusSeated {
-        border-radius: 10%;
         background-color: rgb(42, 0, 181);
-        float: left;
-        width: 10%;
-        padding: 10px;
-        height: 100px;
-        margin: 1%;
     }
     .tableStatusReserved {
-        border-radius: 10%;
         background-color: rgb(235, 158, 52);
-        color: red;
-        float: left;
-        width: 10%;
-        padding: 10px;
-        height: 100px;
-        margin: 1%;
     }
 </style>
-
-@{
-    ViewBag.Title = "Tables";
-}
-
+@{ViewBag.Title = "Tables";}
 <h2>Table Status</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <div class="tableStatusMain">
     @{int i = 0;}
-
     @foreach (var item in Model)
     {
         if (Convert.ToString(item.tstatus) == "f")
         {
-            <div class="tableStatusFree">
+            <div class="tableStatus tableStatusFree">
                 <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
                 @Html.ActionLink("Free", "Create")
             </div>
         }
         else if (Convert.ToString(item.tstatus) == "s")
         {
-            <div class="tableStatusSeated">
+            <div class="tableStatus tableStatusSeated">
                 <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
                 @Html.ActionLink("Seated", "Create")
             </div>
         }
         else
         {
-            <div class="tableStatusReserved">
+            <div class="tableStatus tableStatusReserved">
                 <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
                 @Html.ActionLink("Reserved", "Create")
             </div>
