@@ -10,7 +10,7 @@
 </style>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tables";
 }
 
 <h2>Index</h2>
@@ -18,36 +18,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table  width =50% >
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.id_rtable)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tstatus)
-        </th>
-        <th></th>
-    </tr>
+<div>
+    @{int i = 0;}
 
     @foreach (var item in Model) {
-    <tr>
-        <td>
-            <a class="deneme" , href="#">@Html.DisplayFor(modelItem => item.id_rtable)</a>
-</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tstatus , new {style = "color:red"})
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    if(i==10){
+    <br>
+    i=0;
+    }
+    @Html.DisplayFor(modelItem => item.id_rtable)
+    @Html.DisplayFor(modelItem => item.tstatus)
+    i++;
+    }
+</div>
 
-</table>
-
-@*@for(var i = 10; i < 21; i++)
-{
-<p>Line @i</p>
-}*@
