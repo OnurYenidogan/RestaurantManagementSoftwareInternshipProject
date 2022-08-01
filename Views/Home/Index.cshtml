@@ -4,8 +4,13 @@
         background-color: yellow;
         width : 90%;
     }
-    .deneme {
+    .tableStatus {
+        background-color: greenyellow;
         color: red;
+        float: left;
+        width: 9%;
+        padding: 10px;
+        height:100px;
     }
 </style>
 
@@ -21,14 +26,23 @@
 <div>
     @{int i = 0;}
 
-    @foreach (var item in Model) {
-    if(i==10){
-    <br>
-    i=0;
-    }
-    @Html.DisplayFor(modelItem => item.id_rtable)
-    @Html.DisplayFor(modelItem => item.tstatus)
-    i++;
+    @foreach (var item in Model)
+    {
+        if (i == 0)
+        {
+            
+        }
+
+        <div class="tableStatus">
+            @Html.DisplayFor(modelItem => item.id_rtable)
+            @Html.DisplayFor(modelItem => item.tstatus)
+        </div>
+        i++;
+        if (i == 10)
+        {
+            <br />
+            i = 0;
+        }
     }
 </div>
 
