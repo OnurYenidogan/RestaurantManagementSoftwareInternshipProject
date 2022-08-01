@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.RTable>
 <style>
-    .intro {
-        background-color: yellow;
-        width : 90%;
+    .tableStatusMain {
+        margin: 1%;
     }
+
     .tableStatus {
+        border-radius: 10%;
         background-color: greenyellow;
         color: red;
         float: left;
         width: 10%;
         padding: 10px;
-        height:100px;
+        height: 100px;
+        margin: 1%;
     }
 </style>
 
@@ -23,18 +25,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div>
+<div class="tableStatusMain">
     @{int i = 0;}
 
     @foreach (var item in Model)
     {
 
-            <div class="tableStatus">
-                @Html.DisplayFor(modelItem => item.id_rtable)
-                @Html.DisplayFor(modelItem => item.tstatus)
-            </div>
+    <div class="tableStatus">
+        <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+        @Html.ActionLink(Convert.ToString(item.tstatus) , "Create")
+        @*@Html.DisplayFor(modelItem => item.tstatus)*@
+    </div>
 
 
     }
 </div>
+
 
