@@ -10,52 +10,82 @@
         background-color: greenyellow;
         color: red;
         float: left;
-        width: 10%;
+        width: 13%;
         padding: 10px;
         height: 100px;
         margin: 1%;
+        text-align: center;
     }
     .tableStatusFree {
-        background-color: greenyellow;
+        background-color: springgreen;
     }
     .tableStatusSeated {
         background-color: rgb(42, 0, 181);
+        color:black;
     }
     .tableStatusReserved {
         background-color: rgb(235, 158, 52);
+        color: dimgray;
     }
+    .tableStatusInfo {
+        float: left;
+        width: 75px;
+        height: 23px;
+        margin: 1%;
+        padding: 0px;
+    }
+    .tableLink {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+
 </style>
-@{ViewBag.Title = "Tables";}
-<h2>Table Status</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="tableStatusMain">
-    @{int i = 0;}
-    @foreach (var item in Model)
-    {
-        if (Convert.ToString(item.tstatus) == "f")
+<div>
+    @{ViewBag.Title = "Tables";}
+    <h2>Table Status</h2>
+    <div class="tableStatusFree"></div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div>
+        <div class="tableStatus tableStatusFree tableStatusInfo">Free</div>
+        <div class="tableStatus tableStatusSeated tableStatusInfo">Seated</div>
+        <div class="tableStatus tableStatusReserved tableStatusInfo">Reserved</div>
+    </div>
+    
+    <div class="tableStatusMain">
+        @{int i = 0;}
+        @foreach (var item in Model)
         {
-            <div class="tableStatus tableStatusFree">
-                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
-                @Html.ActionLink("Free", "Create")
-            </div>
+            if (Convert.ToString(item.tstatus) == "f")
+            {
+                <div class="tableStatus tableStatusFree">
+                    <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                    @*@Html.ActionLink("Free", "Create")*@
+                </div>
+            }
+            else if (Convert.ToString(item.tstatus) == "s")
+            {
+                <div class="tableStatus tableStatusSeated">
+                    <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                    @*@Html.ActionLink("Seated", "Create")*@
+                </div>
+            }
+            else
+            {
+                <div class="tableStatus tableStatusReserved">
+                    <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
+                    @*@Html.ActionLink("Reserved", "Create")*@
+                </div>
+            }
         }
-        else if (Convert.ToString(item.tstatus) == "s")
-        {
-            <div class="tableStatus tableStatusSeated">
-                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
-                @Html.ActionLink("Seated", "Create")
-            </div>
-        }
-        else
-        {
-            <div class="tableStatus tableStatusReserved">
-                <h1>@Html.DisplayFor(modelItem => item.id_rtable)</h1>
-                @Html.ActionLink("Reserved", "Create")
-            </div>
-        }
-    }
+    </div>
 </div>
+
 
 
