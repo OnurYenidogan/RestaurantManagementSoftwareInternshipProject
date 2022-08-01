@@ -8,7 +8,7 @@
         background-color: greenyellow;
         color: red;
         float: left;
-        width: 9%;
+        width: 10%;
         padding: 10px;
         height:100px;
     }
@@ -28,21 +28,13 @@
 
     @foreach (var item in Model)
     {
-        if (i == 0)
-        {
-            
-        }
 
-        <div class="tableStatus">
-            @Html.DisplayFor(modelItem => item.id_rtable)
-            @Html.DisplayFor(modelItem => item.tstatus)
-        </div>
-        i++;
-        if (i == 10)
-        {
-            <br />
-            i = 0;
-        }
+            <div class="tableStatus">
+                @Html.DisplayFor(modelItem => item.id_rtable)
+                @Html.DisplayFor(modelItem => item.tstatus)
+            </div>
+
+
     }
 </div>
 
