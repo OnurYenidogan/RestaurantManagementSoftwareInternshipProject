@@ -242,6 +242,7 @@
     <Content Include="Views\fdType\Index.cshtml" />
     <Content Include="Views\fdType\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
