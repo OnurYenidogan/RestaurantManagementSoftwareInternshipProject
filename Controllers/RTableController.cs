@@ -149,9 +149,18 @@ namespace MVCRestaurant27Tem2022.Controllers
         {
             if (ModelState.IsValid)
             {
+                Bill newbill = new Bill();
+                newbill.id_rtable = rTable.id_rtable;
+                newbill.id_waiter = 1; /*for now anyway it assignes admin*/
+                newbill.bdatetime = DateTime.Now;
                 rTable.tstatus = "s";
                 db.Entry(rTable).State = EntityState.Modified;
                 db.SaveChanges();
+
+                db.Bill.Add(newbill);
+                db.SaveChanges();
+
+                ViewBag.Mesaj = "successfully created";
                 return RedirectToAction("Index");
             }
             return View(rTable);
