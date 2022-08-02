@@ -32,6 +32,9 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return HttpNotFound();
             }
+            if (Convert.ToString(rTable.tstatus)=="f"){
+                return RedirectToAction("Index");
+            }
             return View(rTable);
         }
 
