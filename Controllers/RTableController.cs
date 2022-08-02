@@ -139,7 +139,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             return View(rTable);
         }
-
         // POST: RTable/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -152,7 +151,6 @@ namespace MVCRestaurant27Tem2022.Controllers
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
                 Wid = userInDb.id_waiter;
-
                 Bill newbill = new Bill();
                 newbill.id_rtable = rTable.id_rtable;
                 newbill.id_waiter =  Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
@@ -160,10 +158,8 @@ namespace MVCRestaurant27Tem2022.Controllers
                 rTable.tstatus = "s";
                 db.Entry(rTable).State = EntityState.Modified;
                 db.SaveChanges();
-
                 db.Bill.Add(newbill);
                 db.SaveChanges();
-
                 ViewBag.Mesaj = "successfully created";
                 return RedirectToAction("Index");
             }
