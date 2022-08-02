@@ -29,6 +29,25 @@ namespace MVCRestaurant27Tem2022.Controllers
 
             return View();
         }
-        
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Default/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
