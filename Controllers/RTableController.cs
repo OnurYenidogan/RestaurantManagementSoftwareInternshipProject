@@ -33,7 +33,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 return HttpNotFound();
             }
             if (Convert.ToString(rTable.tstatus)=="f"){
-                return RedirectToAction("Edit/"+ rTable.id_rtable);
+                return RedirectToAction("Free/"+ rTable.id_rtable);
             }
             return View(rTable);
         }
@@ -125,6 +125,36 @@ namespace MVCRestaurant27Tem2022.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Free(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rTable);
+        }
+
+        // POST: RTable/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Free([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        {
+            if (ModelState.IsValid)
+            {
+                rTable.tstatus = "s";
+                db.Entry(rTable).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(rTable);
         }
     }
 }

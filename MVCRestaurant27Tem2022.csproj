@@ -247,6 +247,7 @@
     <Content Include="Views\RTable\Details.cshtml" />
     <Content Include="Views\RTable\Edit.cshtml" />
     <Content Include="Views\RTable\Index.cshtml" />
+    <Content Include="Views\RTable\Free.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
