@@ -18,7 +18,6 @@ namespace MVCRestaurant27Tem2022.Models
         public RTable()
         {
             this.Bill = new HashSet<Bill>();
-            this.Customer = new HashSet<Customer>();
             this.Reservation = new HashSet<Reservation>();
         }
     
@@ -27,8 +26,6 @@ namespace MVCRestaurant27Tem2022.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bill { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservation { get; set; }
     }
