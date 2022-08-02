@@ -149,9 +149,13 @@ namespace MVCRestaurant27Tem2022.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                int Wid;
+                Wid = userInDb.id_waiter;
+
                 Bill newbill = new Bill();
                 newbill.id_rtable = rTable.id_rtable;
-                newbill.id_waiter = 1; /*for now anyway it assignes admin*/
+                newbill.id_waiter =  Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
                 newbill.bdatetime = DateTime.Now;
                 rTable.tstatus = "s";
                 db.Entry(rTable).State = EntityState.Modified;
