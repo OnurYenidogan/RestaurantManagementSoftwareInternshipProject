@@ -35,6 +35,13 @@ namespace MVCRestaurant27Tem2022.Controllers
             if (Convert.ToString(rTable.tstatus)=="f"){
                 return RedirectToAction("Free/"+ rTable.id_rtable);
             }
+            else if(Convert.ToString(rTable.tstatus) == "s"){
+                return RedirectToAction("Seated/" + rTable.id_rtable);
+            }
+            else if (Convert.ToString(rTable.tstatus) == "r")
+            {
+                return RedirectToAction("Reserved/" + rTable.id_rtable);
+            }
             return View(rTable);
         }
 
@@ -160,7 +167,46 @@ namespace MVCRestaurant27Tem2022.Controllers
                 db.SaveChanges();
                 db.Bill.Add(newbill);
                 db.SaveChanges();
-                ViewBag.Mesaj = "successfully created";
+                //ViewBag.Mesaj = "successfully created";
+                return RedirectToAction("Index");
+            }
+            return View(rTable);
+        }
+        public ActionResult Seated(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rTable);
+        }
+        // POST: RTable/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Seated([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        {
+            if (ModelState.IsValid)
+            {
+                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                int Wid;
+                Wid = userInDb.id_waiter;
+                Bill newbill = new Bill();
+                newbill.id_rtable = rTable.id_rtable;
+                newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
+                newbill.bdatetime = DateTime.Now;
+                rTable.tstatus = "s";
+                db.Entry(rTable).State = EntityState.Modified;
+                db.SaveChanges();
+                db.Bill.Add(newbill);
+                db.SaveChanges();
+                //ViewBag.Mesaj = "successfully created";
                 return RedirectToAction("Index");
             }
             return View(rTable);

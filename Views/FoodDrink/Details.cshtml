@@ -1,0 +1,50 @@
+﻿@model MVCRestaurant27Tem2022.Models.FoodDrink
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FoodDrink</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FDname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.onmenu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.onmenu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fdType.typeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fdType.typeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_FD }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
