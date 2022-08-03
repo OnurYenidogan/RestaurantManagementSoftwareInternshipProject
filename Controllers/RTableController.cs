@@ -211,5 +211,38 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             return View(rTable);
         }
+        public ActionResult Reserved(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rTable);
+        }
+        // POST: RTable/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reserved([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        {
+            if (ModelState.IsValid)
+            {
+                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                int Wid;
+                Wid = userInDb.id_waiter;
+                rTable.tstatus = "f";
+                db.Entry(rTable).State = EntityState.Modified;
+                db.SaveChanges();
+                //ViewBag.Mesaj = "successfully created";
+                return RedirectToAction("Index");
+            }
+            return View(rTable);
+        }
     }
 }
