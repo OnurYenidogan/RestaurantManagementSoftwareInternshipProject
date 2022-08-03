@@ -25,6 +25,7 @@ namespace MVCRestaurant27Tem2022.Models
         public int id_rtable { get; set; }
         public int id_waiter { get; set; }
         public System.DateTime bdatetime { get; set; }
+        public bool ispaid { get; set; }
     
         public virtual RTable RTable { get; set; }
         public virtual Waiter Waiter { get; set; }

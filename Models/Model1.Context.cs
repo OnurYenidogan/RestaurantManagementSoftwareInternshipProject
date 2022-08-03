@@ -32,7 +32,7 @@ namespace MVCRestaurant27Tem2022.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Waiter> Waiter { get; set; }
         public virtual DbSet<FoodDrink> FoodDrink { get; set; }
-        public virtual DbSet<Bill> Bill { get; set; }
         public virtual DbSet<RTable> RTable { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
     }
 }

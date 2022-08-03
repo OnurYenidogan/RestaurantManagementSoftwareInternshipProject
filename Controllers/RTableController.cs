@@ -162,6 +162,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 newbill.id_rtable = rTable.id_rtable;
                 newbill.id_waiter =  Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
                 newbill.bdatetime = DateTime.Now;
+                newbill.ispaid = false;
                 rTable.tstatus = "s";
                 db.Entry(rTable).State = EntityState.Modified;
                 db.SaveChanges();
@@ -197,14 +198,13 @@ namespace MVCRestaurant27Tem2022.Controllers
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
                 Wid = userInDb.id_waiter;
-                Bill newbill = new Bill();
-                newbill.id_rtable = rTable.id_rtable;
-                newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
-                newbill.bdatetime = DateTime.Now;
-                rTable.tstatus = "s";
+                //FoodDrink foodDrink = db.FoodDrink.Find(id);
+                var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable && x.ispaid == false);
+                rTable.tstatus = "f";
+                billInDb.ispaid = true;
                 db.Entry(rTable).State = EntityState.Modified;
+                db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
-                db.Bill.Add(newbill);
                 db.SaveChanges();
                 //ViewBag.Mesaj = "successfully created";
                 return RedirectToAction("Index");

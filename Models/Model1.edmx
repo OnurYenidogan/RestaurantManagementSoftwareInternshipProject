@@ -14,6 +14,7 @@
           <Property Name="id_rtable" Type="int" Nullable="false" />
           <Property Name="id_waiter" Type="int" Nullable="false" />
           <Property Name="bdatetime" Type="datetime" Nullable="false" />
+          <Property Name="ispaid" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="fdType">
           <Key>
@@ -333,8 +334,12 @@
             <End Role="FoodDrink" EntitySet="FoodDrink" />
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
-          <EntitySet Name="Bill" EntityType="RestaurantDBModel.Bill" />
           <EntitySet Name="RTable" EntityType="RestaurantDBModel.RTable" />
+          <AssociationSet Name="FK__Reservati__id_rt__2E1BDC42" Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42">
+            <End Role="RTable" EntitySet="RTable" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <EntitySet Name="Bill" EntityType="RestaurantDBModel.Bill" />
           <AssociationSet Name="FK__Bill__id_rtable__33D4B598" Association="RestaurantDBModel.FK__Bill__id_rtable__33D4B598">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Bill" EntitySet="Bill" />
@@ -346,10 +351,6 @@
           <AssociationSet Name="FK__ROrder__id_bill__38996AB5" Association="RestaurantDBModel.FK__ROrder__id_bill__38996AB5">
             <End Role="Bill" EntitySet="Bill" />
             <End Role="ROrder" EntitySet="ROrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Reservati__id_rt__2E1BDC42" Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42">
-            <End Role="RTable" EntitySet="RTable" />
-            <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="FoodDrink">
@@ -401,6 +402,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RTable">
+          <Key>
+            <PropertyRef Name="id_rtable" />
+          </Key>
+          <Property Name="id_rtable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tstatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reservation" Relationship="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" FromRole="RTable" ToRole="Reservation" />
+          <NavigationProperty Name="Bill" Relationship="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" FromRole="RTable" ToRole="Bill" />
+        </EntityType>
+        <Association Name="FK__Reservati__id_rt__2E1BDC42">
+          <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
+          <End Type="RestaurantDBModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RTable">
+              <PropertyRef Name="id_rtable" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="id_rtable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="id_bill" />
@@ -410,18 +432,10 @@
           <Property Name="id_rtable" Type="Int32" Nullable="false" />
           <Property Name="id_waiter" Type="Int32" Nullable="false" />
           <Property Name="bdatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ispaid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RTable" Relationship="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" FromRole="Bill" ToRole="RTable" />
           <NavigationProperty Name="Waiter" Relationship="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" FromRole="Bill" ToRole="Waiter" />
           <NavigationProperty Name="ROrder" Relationship="RestaurantDBModel.FK__ROrder__id_bill__38996AB5" FromRole="Bill" ToRole="ROrder" />
-        </EntityType>
-        <EntityType Name="RTable">
-          <Key>
-            <PropertyRef Name="id_rtable" />
-          </Key>
-          <Property Name="id_rtable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tstatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Bill" Relationship="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" FromRole="RTable" ToRole="Bill" />
-          <NavigationProperty Name="Reservation" Relationship="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" FromRole="RTable" ToRole="Reservation" />
         </EntityType>
         <Association Name="FK__Bill__id_rtable__33D4B598">
           <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
@@ -456,18 +470,6 @@
             </Principal>
             <Dependent Role="ROrder">
               <PropertyRef Name="id_bill" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Reservati__id_rt__2E1BDC42">
-          <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
-          <End Type="RestaurantDBModel.Reservation" Role="Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RTable">
-              <PropertyRef Name="id_rtable" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="id_rtable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,22 +553,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Bill">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Bill">
-              <MappingFragment StoreEntitySet="Bill">
-                <ScalarProperty Name="bdatetime" ColumnName="bdatetime" />
-                <ScalarProperty Name="id_waiter" ColumnName="id_waiter" />
-                <ScalarProperty Name="id_rtable" ColumnName="id_rtable" />
-                <ScalarProperty Name="Bsum" ColumnName="Bsum" />
-                <ScalarProperty Name="id_bill" ColumnName="id_bill" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RTable">
             <EntityTypeMapping TypeName="RestaurantDBModel.RTable">
               <MappingFragment StoreEntitySet="RTable">
                 <ScalarProperty Name="tstatus" ColumnName="tstatus" />
                 <ScalarProperty Name="id_rtable" ColumnName="id_rtable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bill">
+            <EntityTypeMapping TypeName="RestaurantDBModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="ispaid" ColumnName="ispaid" />
+                <ScalarProperty Name="bdatetime" ColumnName="bdatetime" />
+                <ScalarProperty Name="id_waiter" ColumnName="id_waiter" />
+                <ScalarProperty Name="id_rtable" ColumnName="id_rtable" />
+                <ScalarProperty Name="Bsum" ColumnName="Bsum" />
+                <ScalarProperty Name="id_bill" ColumnName="id_bill" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

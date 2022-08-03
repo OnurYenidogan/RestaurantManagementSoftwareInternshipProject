@@ -16,12 +16,12 @@
         <AssociationConnector Association="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A" />
         <AssociationConnector Association="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99" />
         <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" />
-        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="7.625" />
         <EntityTypeShape EntityType="RestaurantDBModel.RTable" Width="1.5" PointX="0.75" PointY="11" />
+        <AssociationConnector Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" />
+        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="7.5" />
         <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" />
         <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" />
         <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_bill__38996AB5" />
-        <AssociationConnector Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
