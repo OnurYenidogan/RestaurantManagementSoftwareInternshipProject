@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.Waiter>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "WaiterManagement";
 }
 
-<h2>Index</h2>
+<h2>WaiterManagement</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.isAdmin)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_waiter }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_waiter }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_waiter })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

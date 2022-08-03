@@ -135,6 +135,7 @@
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RTableController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\oldWaiterController.cs" />
     <Compile Include="Controllers\WaiterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,8 +238,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\oldIndex.cshtml" />
     <Content Include="Views\Security\Login.cshtml" />
-    <Content Include="Views\Waiter\Index.cshtml" />
-    <Content Include="Views\Waiter\Create.cshtml" />
+    <Content Include="Views\oldWaiter\Index.cshtml" />
+    <Content Include="Views\oldWaiter\Create.cshtml" />
     <Content Include="Views\fdType\Index.cshtml" />
     <Content Include="Views\fdType\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -262,6 +263,11 @@
     <Content Include="Views\Reservation\Details.cshtml" />
     <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Waiter\Create.cshtml" />
+    <Content Include="Views\Waiter\Delete.cshtml" />
+    <Content Include="Views\Waiter\Details.cshtml" />
+    <Content Include="Views\Waiter\Edit.cshtml" />
+    <Content Include="Views\Waiter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

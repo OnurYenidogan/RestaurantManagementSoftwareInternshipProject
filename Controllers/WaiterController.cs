@@ -1,43 +1,127 @@
-﻿using MVCRestaurant27Tem2022.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
+using MVCRestaurant27Tem2022.Models;
 
 namespace MVCRestaurant27Tem2022.Controllers
 {
-    [Authorize(Users = "admin")]//bu sayfaya sadece admin adlı kullanıcı girebiliyor
     public class WaiterController : Controller
     {
-        RestaurantDBEntities db = new RestaurantDBEntities();
+        private RestaurantDBEntities db = new RestaurantDBEntities();
+
+        // GET: Waiter
         public ActionResult Index()
         {
             return View(db.Waiter.ToList());
         }
+
+        // GET: Waiter/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Waiter waiter = db.Waiter.Find(id);
+            if (waiter == null)
+            {
+                return HttpNotFound();
+            }
+            return View(waiter);
+        }
+
+        // GET: Waiter/Create
         public ActionResult Create()
         {
             return View();
         }
+
+        // POST: Waiter/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Waiter newWaiter)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id_waiter,Wnick,WFullName,wpassword,isAdmin")] Waiter waiter)
         {
             if (ModelState.IsValid)
             {
-                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == newWaiter.Wnick);
-                if (userInDb != null)
-                {
-                    ViewBag.Mesaj = "This username has already been taken";
-                }
-                else
-                {
-                    db.Waiter.Add(newWaiter);
-                    db.SaveChanges();
-                    ViewBag.Mesaj = "Account has been successfully created";
-                }
+                db.Waiter.Add(waiter);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View();
+
+            return View(waiter);
+        }
+
+        // GET: Waiter/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Waiter waiter = db.Waiter.Find(id);
+            if (waiter == null)
+            {
+                return HttpNotFound();
+            }
+            return View(waiter);
+        }
+
+        // POST: Waiter/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id_waiter,Wnick,WFullName,wpassword,isAdmin")] Waiter waiter)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(waiter).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(waiter);
+        }
+
+        // GET: Waiter/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Waiter waiter = db.Waiter.Find(id);
+            if (waiter == null)
+            {
+                return HttpNotFound();
+            }
+            return View(waiter);
+        }
+
+        // POST: Waiter/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Waiter waiter = db.Waiter.Find(id);
+            db.Waiter.Remove(waiter);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
