@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.RTable>
 <style>
+    .contentMain {
+        float: left;
+    }
     .tableStatusMain {
         margin: 1%;
         float: right;
@@ -51,7 +54,7 @@
         z-index: 1;
     }
 </style>
-<div>
+<div class="contentMain">
     @{ViewBag.Title = "Tables";}
     <h2>Table Status</h2>
     <div class="tableStatusFree"></div>
