@@ -1,0 +1,58 @@
+﻿@model MVCRestaurant27Tem2022.Models.Reservation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.rdatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rdatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rsurname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rsurname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RTable.tstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RTable.tstatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_res }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

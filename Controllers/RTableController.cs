@@ -205,7 +205,6 @@ namespace MVCRestaurant27Tem2022.Controllers
                 db.Entry(rTable).State = EntityState.Modified;
                 db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
-                db.SaveChanges();
                 //ViewBag.Mesaj = "successfully created";
                 return RedirectToAction("Index");
             }

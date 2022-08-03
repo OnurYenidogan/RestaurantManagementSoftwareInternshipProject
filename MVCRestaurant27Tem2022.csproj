@@ -132,6 +132,7 @@
     <Compile Include="Controllers\fdTypeController.cs" />
     <Compile Include="Controllers\FoodDrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RTableController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\WaiterController.cs" />
@@ -256,6 +257,11 @@
     <Content Include="Views\FoodDrink\Edit.cshtml" />
     <Content Include="Views\FoodDrink\Index.cshtml" />
     <Content Include="Views\RTable\Reserved.cshtml" />
+    <Content Include="Views\Reservation\Create.cshtml" />
+    <Content Include="Views\Reservation\Delete.cshtml" />
+    <Content Include="Views\Reservation\Details.cshtml" />
+    <Content Include="Views\Reservation\Edit.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
