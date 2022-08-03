@@ -4,11 +4,9 @@
         margin: 1%;
         float: right;
     }
-
     .tableStatus {
         border-radius: 10%;
         background-color: greenyellow;
-        color: red;
         float: left;
         width: 13%;
         padding: 10px;
@@ -17,21 +15,26 @@
         text-align: center;
         position: relative;
     }
-
     .tableStatusFree {
         background-color: springgreen;
     }
-
+    .tableStatusFree a{
+        color:red;
+    }
+    .tableStatusSeated a{
+        color: black;
+    }
     .tableStatusSeated {
         background-color: rgb(42, 0, 181);
         color: black;
     }
-
     .tableStatusReserved {
         background-color: rgb(235, 158, 52);
         color: dimgray;
     }
-
+    .tableStatusReserved a{
+        color: dimgray;
+    }
     .tableStatusInfo {
         float: left;
         width: 75px;
@@ -39,7 +42,6 @@
         margin: 1%;
         padding: 0px;
     }
-
     .tableLink {
         position: absolute;
         width: 100%;
@@ -57,9 +59,9 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     <div>
-        <div class="tableStatus tableStatusFree tableStatusInfo">Free</div>
-        <div class="tableStatus tableStatusSeated tableStatusInfo">Seated</div>
-        <div class="tableStatus tableStatusReserved tableStatusInfo">Reserved</div>
+        <div class="tableStatus tableStatusFree tableStatusInfo"><a>Free</a></div>
+        <div class="tableStatus tableStatusSeated tableStatusInfo"><a>Seated</a></div>
+        <div class="tableStatus tableStatusReserved tableStatusInfo"><a>Reserved</a></div>
     </div>
     <div class="tableStatusMain">
         @{int i = 0;}

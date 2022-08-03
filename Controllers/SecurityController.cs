@@ -26,7 +26,8 @@ namespace MVCRestaurant27Tem2022.Controllers
             if (userInDb !=null)
             {
                 FormsAuthentication.SetAuthCookie(user.Wnick, false);
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "RTable");
             }
             else
             {
