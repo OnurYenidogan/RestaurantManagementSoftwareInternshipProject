@@ -184,6 +184,8 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return HttpNotFound();
             }
+
+
             return View(rTable);
         }
         // POST: RTable/Edit/5
@@ -191,22 +193,30 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Seated([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        public ActionResult Seated(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
         {
             if (ModelState.IsValid)
             {
-                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
-                int Wid;
-                Wid = userInDb.id_waiter;
-                //FoodDrink foodDrink = db.FoodDrink.Find(id);
-                var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable && x.ispaid == false);
-                rTable.tstatus = "f";
-                billInDb.ispaid = true;
-                db.Entry(rTable).State = EntityState.Modified;
-                db.Entry(billInDb).State = EntityState.Modified;
-                db.SaveChanges();
-                //ViewBag.Mesaj = "successfully created";
-                return RedirectToAction("Index");
+                switch (submit)
+                {
+                    case "order":
+                        ViewBag.Message = "Customer saved successfully!";
+                        break;
+                    case "Checkout":
+                        var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                        int Wid;
+                        Wid = userInDb.id_waiter;
+                        //FoodDrink foodDrink = db.FoodDrink.Find(id);
+                        var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable && x.ispaid == false);
+                        rTable.tstatus = "f";
+                        billInDb.ispaid = true;
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.Entry(billInDb).State = EntityState.Modified;
+                        db.SaveChanges();
+                        //ViewBag.Mesaj = "successfully created";
+                        return RedirectToAction("Index");
+                }
+
             }
             return View(rTable);
         }
