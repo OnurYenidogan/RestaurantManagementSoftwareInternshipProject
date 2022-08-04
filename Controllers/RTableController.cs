@@ -202,16 +202,48 @@ namespace MVCRestaurant27Tem2022.Controllers
                     case "order":
                         return RedirectToAction("Create/"+ rTable.id_rtable,"ROrder");
                     case "Checkout":
+                        
                         var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+
+
+
+
+
+
+
+
+
+
+
+
                         int Wid;
                         Wid = userInDb.id_waiter;
                         //FoodDrink foodDrink = db.FoodDrink.Find(id);
                         var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
                         rTable.tstatus = "f";
+                        BillCompleted newbillComp= new BillCompleted();
+                        newbillComp.Bsum = Convert.ToInt32(billInDb.Bsum);//Küsüratı aktarmaz bu şekilde!!!!!!
+                        newbillComp.id_rtable = billInDb.id_rtable;
+                        newbillComp.id_waiter = billInDb.id_waiter;
+                        newbillComp.bdatetime = billInDb.bdatetime;
+
+
+                        int dltID = Convert.ToInt32(billInDb.id_bill);
+
+                        Bill deletebill =  db.Bill.Find(dltID);
+                        db.Bill.Remove(deletebill);
+                         db.SaveChangesAsync();
+
+
                         //billInDb.ispaid = true;
+                        db.BillCompleted.Add(newbillComp);
                         db.Entry(rTable).State = EntityState.Modified;
-                        db.Entry(billInDb).State = EntityState.Modified;
+                        //db.Entry(billInDb).State = EntityState.Modified;
                         db.SaveChanges();
+
+                        //billInDb = await db.ROrder.FindAsync(id);
+                        
+                        //await db.SaveChangesAsync();
                         //ViewBag.Mesaj = "successfully created";
                         return RedirectToAction("Index");
                 }
