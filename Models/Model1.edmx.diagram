@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e53f367157a54d778233532baccdaf0a" Name="Diagram1">
+      <Diagram DiagramId="e53f367157a54d778233532baccdaf0a" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="RestaurantDBModel.fdType" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.PriceUpdates" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.Reservation" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
@@ -18,10 +18,16 @@
         <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" />
         <EntityTypeShape EntityType="RestaurantDBModel.RTable" Width="1.5" PointX="0.75" PointY="11" />
         <AssociationConnector Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" />
-        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="RestaurantDBModel.BillCompleted" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="RestaurantDBModel.ROrderCompleted" Width="1.5" PointX="7.5" PointY="0.75" />
         <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" />
         <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" />
         <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_bill__38996AB5" />
+        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_rt__1BC821DD" />
+        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_wa__1CBC4616" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ROrderCom__id_FD__1F98B2C1" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ROrderCom__id_wa__2180FB33" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

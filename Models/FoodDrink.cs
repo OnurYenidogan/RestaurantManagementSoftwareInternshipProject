@@ -19,6 +19,7 @@ namespace MVCRestaurant27Tem2022.Models
         {
             this.PriceUpdates = new HashSet<PriceUpdates>();
             this.ROrder = new HashSet<ROrder>();
+            this.ROrderCompleted = new HashSet<ROrderCompleted>();
         }
     
         public long id_FD { get; set; }
@@ -32,5 +33,7 @@ namespace MVCRestaurant27Tem2022.Models
         public virtual ICollection<PriceUpdates> PriceUpdates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROrder> ROrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROrderCompleted> ROrderCompleted { get; set; }
     }
 }

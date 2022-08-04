@@ -38,8 +38,18 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
 
         // GET: ROrder/Create
-        public ActionResult Create()
+
+        public ActionResult Create(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick");
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname");
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill");
@@ -50,11 +60,20 @@ namespace MVCRestaurant27Tem2022.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+     //   [Route("{id?}")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id_order,id_FD,id_bill,id_waiter,odatetime")] ROrder rOrder)
+        public async Task<ActionResult> Create(ROrder rOrder,string id)
         {
             if (ModelState.IsValid)
             {
+                int idInt = Convert.ToInt32(id);
+                var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == idInt);
+                rOrder.id_bill = billInDb.id_bill;
+                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                int Wid;
+                Wid = userInDb.id_waiter;
+                rOrder.id_waiter = Wid;
+                rOrder.odatetime = DateTime.Now;
                 db.ROrder.Add(rOrder);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

@@ -34,5 +34,7 @@ namespace MVCRestaurant27Tem2022.Models
         public virtual DbSet<FoodDrink> FoodDrink { get; set; }
         public virtual DbSet<RTable> RTable { get; set; }
         public virtual DbSet<Bill> Bill { get; set; }
+        public virtual DbSet<BillCompleted> BillCompleted { get; set; }
+        public virtual DbSet<ROrderCompleted> ROrderCompleted { get; set; }
     }
 }

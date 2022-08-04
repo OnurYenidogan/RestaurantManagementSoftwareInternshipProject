@@ -12,23 +12,15 @@ namespace MVCRestaurant27Tem2022.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bill
+    public partial class BillCompleted
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bill()
-        {
-            this.ROrder = new HashSet<ROrder>();
-        }
-    
         public long id_bill { get; set; }
-        public Nullable<decimal> Bsum { get; set; }
+        public decimal Bsum { get; set; }
         public int id_rtable { get; set; }
         public int id_waiter { get; set; }
         public System.DateTime bdatetime { get; set; }
     
         public virtual RTable RTable { get; set; }
         public virtual Waiter Waiter { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROrder> ROrder { get; set; }
     }
 }
