@@ -1,0 +1,50 @@
+﻿@model MVCRestaurant27Tem2022.Models.ROrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ROrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.odatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.odatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Waiter.Wnick)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Waiter.Wnick)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodDrink.FDname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodDrink.FDname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill.id_bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill.id_bill)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_order }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

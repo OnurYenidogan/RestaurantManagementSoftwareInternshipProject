@@ -1,0 +1,56 @@
+﻿@model MVCRestaurant27Tem2022.Models.ROrder
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ROrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.odatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.odatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Waiter.Wnick)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Waiter.Wnick)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodDrink.FDname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodDrink.FDname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bill.id_bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bill.id_bill)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
