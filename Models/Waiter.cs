@@ -20,7 +20,6 @@ namespace MVCRestaurant27Tem2022.Models
             this.ROrder = new HashSet<ROrder>();
             this.Bill = new HashSet<Bill>();
             this.BillCompleted = new HashSet<BillCompleted>();
-            this.ROrderCompleted = new HashSet<ROrderCompleted>();
         }
     
         public int id_waiter { get; set; }
@@ -35,7 +34,5 @@ namespace MVCRestaurant27Tem2022.Models
         public virtual ICollection<Bill> Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillCompleted> BillCompleted { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROrderCompleted> ROrderCompleted { get; set; }
     }
 }

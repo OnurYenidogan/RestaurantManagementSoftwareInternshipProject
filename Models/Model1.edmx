@@ -10,7 +10,7 @@
             <PropertyRef Name="id_bill" />
           </Key>
           <Property Name="id_bill" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Bsum" Type="money" />
+          <Property Name="Bsum" Type="money" Nullable="false" />
           <Property Name="id_rtable" Type="int" Nullable="false" />
           <Property Name="id_waiter" Type="int" Nullable="false" />
           <Property Name="bdatetime" Type="datetime" Nullable="false" />
@@ -72,11 +72,17 @@
           <Property Name="id_waiter" Type="int" Nullable="false" />
           <Property Name="odatetime" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RestaurantDB.dbo.ROrderCompleted' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ROrderCompleted">
           <Key>
             <PropertyRef Name="id_order" />
+            <PropertyRef Name="id_FD" />
+            <PropertyRef Name="id_bill" />
+            <PropertyRef Name="id_waiter" />
+            <PropertyRef Name="odatetime" />
           </Key>
-          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
           <Property Name="id_FD" Type="bigint" Nullable="false" />
           <Property Name="id_bill" Type="bigint" Nullable="false" />
           <Property Name="id_waiter" Type="int" Nullable="false" />
@@ -109,7 +115,7 @@
           <Property Name="wpassword" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Bill__id_rtable__33D4B598">
+        <Association Name="FK__Bill__id_rtable__3587F3E0">
           <End Role="RTable" Type="Self.RTable" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -121,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bill__id_waiter__34C8D9D1">
+        <Association Name="FK__Bill__id_waiter__367C1819">
           <End Role="Waiter" Type="Self.Waiter" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
@@ -133,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillCompl__id_rt__1BC821DD">
+        <Association Name="FK__BillCompl__id_rt__3E1D39E1">
           <End Role="RTable" Type="Self.RTable" Multiplicity="1" />
           <End Role="BillCompleted" Type="Self.BillCompleted" Multiplicity="*" />
           <ReferentialConstraint>
@@ -145,7 +151,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillCompl__id_wa__1CBC4616">
+        <Association Name="FK__BillCompl__id_wa__3F115E1A">
           <End Role="Waiter" Type="Self.Waiter" Multiplicity="1" />
           <End Role="BillCompleted" Type="Self.BillCompleted" Multiplicity="*" />
           <ReferentialConstraint>
@@ -193,7 +199,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROrder__id_bill__38996AB5">
+        <Association Name="FK__ROrder__id_bill__3A4CA8FD">
           <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
           <End Role="ROrder" Type="Self.ROrder" Multiplicity="*" />
           <ReferentialConstraint>
@@ -205,7 +211,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROrder__id_FD__37A5467C">
+        <Association Name="FK__ROrder__id_FD__395884C4">
           <End Role="FoodDrink" Type="Self.FoodDrink" Multiplicity="1" />
           <End Role="ROrder" Type="Self.ROrder" Multiplicity="*" />
           <ReferentialConstraint>
@@ -217,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ROrder__id_waite__398D8EEE">
+        <Association Name="FK__ROrder__id_waite__3B40CD36">
           <End Role="Waiter" Type="Self.Waiter" Multiplicity="1" />
           <End Role="ROrder" Type="Self.ROrder" Multiplicity="*" />
           <ReferentialConstraint>
@@ -225,30 +231,6 @@
               <PropertyRef Name="id_waiter" />
             </Principal>
             <Dependent Role="ROrder">
-              <PropertyRef Name="id_waiter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ROrderCom__id_FD__1F98B2C1">
-          <End Role="FoodDrink" Type="Self.FoodDrink" Multiplicity="1" />
-          <End Role="ROrderCompleted" Type="Self.ROrderCompleted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FoodDrink">
-              <PropertyRef Name="id_FD" />
-            </Principal>
-            <Dependent Role="ROrderCompleted">
-              <PropertyRef Name="id_FD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ROrderCom__id_wa__2180FB33">
-          <End Role="Waiter" Type="Self.Waiter" Multiplicity="1" />
-          <End Role="ROrderCompleted" Type="Self.ROrderCompleted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Waiter">
-              <PropertyRef Name="id_waiter" />
-            </Principal>
-            <Dependent Role="ROrderCompleted">
               <PropertyRef Name="id_waiter" />
             </Dependent>
           </ReferentialConstraint>
@@ -261,23 +243,31 @@
           <EntitySet Name="PriceUpdates" EntityType="Self.PriceUpdates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROrder" EntityType="Self.ROrder" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ROrderCompleted" EntityType="Self.ROrderCompleted" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RTable" EntityType="Self.RTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Waiter" EntityType="Self.Waiter" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Bill__id_rtable__33D4B598" Association="Self.FK__Bill__id_rtable__33D4B598">
+          <EntitySet Name="ROrderCompleted" EntityType="Self.ROrderCompleted" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ROrderCompleted].[id_order] AS [id_order], 
+    [ROrderCompleted].[id_FD] AS [id_FD], 
+    [ROrderCompleted].[id_bill] AS [id_bill], 
+    [ROrderCompleted].[id_waiter] AS [id_waiter], 
+    [ROrderCompleted].[odatetime] AS [odatetime]
+    FROM [dbo].[ROrderCompleted] AS [ROrderCompleted]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Bill__id_rtable__3587F3E0" Association="Self.FK__Bill__id_rtable__3587F3E0">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bill__id_waiter__34C8D9D1" Association="Self.FK__Bill__id_waiter__34C8D9D1">
+          <AssociationSet Name="FK__Bill__id_waiter__367C1819" Association="Self.FK__Bill__id_waiter__367C1819">
             <End Role="Waiter" EntitySet="Waiter" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillCompl__id_rt__1BC821DD" Association="Self.FK__BillCompl__id_rt__1BC821DD">
+          <AssociationSet Name="FK__BillCompl__id_rt__3E1D39E1" Association="Self.FK__BillCompl__id_rt__3E1D39E1">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="BillCompleted" EntitySet="BillCompleted" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillCompl__id_wa__1CBC4616" Association="Self.FK__BillCompl__id_wa__1CBC4616">
+          <AssociationSet Name="FK__BillCompl__id_wa__3F115E1A" Association="Self.FK__BillCompl__id_wa__3F115E1A">
             <End Role="Waiter" EntitySet="Waiter" />
             <End Role="BillCompleted" EntitySet="BillCompleted" />
           </AssociationSet>
@@ -293,25 +283,17 @@
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__ROrder__id_bill__38996AB5" Association="Self.FK__ROrder__id_bill__38996AB5">
+          <AssociationSet Name="FK__ROrder__id_bill__3A4CA8FD" Association="Self.FK__ROrder__id_bill__3A4CA8FD">
             <End Role="Bill" EntitySet="Bill" />
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__ROrder__id_FD__37A5467C" Association="Self.FK__ROrder__id_FD__37A5467C">
+          <AssociationSet Name="FK__ROrder__id_FD__395884C4" Association="Self.FK__ROrder__id_FD__395884C4">
             <End Role="FoodDrink" EntitySet="FoodDrink" />
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__ROrder__id_waite__398D8EEE" Association="Self.FK__ROrder__id_waite__398D8EEE">
+          <AssociationSet Name="FK__ROrder__id_waite__3B40CD36" Association="Self.FK__ROrder__id_waite__3B40CD36">
             <End Role="Waiter" EntitySet="Waiter" />
             <End Role="ROrder" EntitySet="ROrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROrderCom__id_FD__1F98B2C1" Association="Self.FK__ROrderCom__id_FD__1F98B2C1">
-            <End Role="FoodDrink" EntitySet="FoodDrink" />
-            <End Role="ROrderCompleted" EntitySet="ROrderCompleted" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROrderCom__id_wa__2180FB33" Association="Self.FK__ROrderCom__id_wa__2180FB33">
-            <End Role="Waiter" EntitySet="Waiter" />
-            <End Role="ROrderCompleted" EntitySet="ROrderCompleted" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -382,8 +364,7 @@
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ROrder" Relationship="Self.FK__ROrder__id_waite__398D8EEE" FromRole="Waiter" ToRole="ROrder" />
           <NavigationProperty Name="Bill" Relationship="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" FromRole="Waiter" ToRole="Bill" />
-          <NavigationProperty Name="BillCompleted" Relationship="RestaurantDBModel.FK__BillCompl__id_wa__1CBC4616" FromRole="Waiter" ToRole="BillCompleted" />
-          <NavigationProperty Name="ROrderCompleted" Relationship="RestaurantDBModel.FK__ROrderCom__id_wa__2180FB33" FromRole="Waiter" ToRole="ROrderCompleted" />
+          <NavigationProperty Name="BillCompleted" Relationship="RestaurantDBModel.FK__BillCompl__id_wa__3F115E1A" FromRole="Waiter" ToRole="BillCompleted" />
         </EntityType>
         <Association Name="FK__ROrder__id_waite__398D8EEE">
           <End Role="Waiter" Type="Self.Waiter" Multiplicity="1" />
@@ -427,8 +408,6 @@
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
           <EntitySet Name="Bill" EntityType="RestaurantDBModel.Bill" />
-          <EntitySet Name="BillCompleted" EntityType="RestaurantDBModel.BillCompleted" />
-          <EntitySet Name="ROrderCompleted" EntityType="RestaurantDBModel.ROrderCompleted" />
           <AssociationSet Name="FK__Bill__id_rtable__33D4B598" Association="RestaurantDBModel.FK__Bill__id_rtable__33D4B598">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="Bill" EntitySet="Bill" />
@@ -441,21 +420,15 @@
             <End Role="Bill" EntitySet="Bill" />
             <End Role="ROrder" EntitySet="ROrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillCompl__id_rt__1BC821DD" Association="RestaurantDBModel.FK__BillCompl__id_rt__1BC821DD">
+          <EntitySet Name="BillCompleted" EntityType="RestaurantDBModel.BillCompleted" />
+          <EntitySet Name="ROrderCompleted" EntityType="RestaurantDBModel.ROrderCompleted" />
+          <AssociationSet Name="FK__BillCompl__id_rt__3E1D39E1" Association="RestaurantDBModel.FK__BillCompl__id_rt__3E1D39E1">
             <End Role="RTable" EntitySet="RTable" />
             <End Role="BillCompleted" EntitySet="BillCompleted" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillCompl__id_wa__1CBC4616" Association="RestaurantDBModel.FK__BillCompl__id_wa__1CBC4616">
+          <AssociationSet Name="FK__BillCompl__id_wa__3F115E1A" Association="RestaurantDBModel.FK__BillCompl__id_wa__3F115E1A">
             <End Role="Waiter" EntitySet="Waiter" />
             <End Role="BillCompleted" EntitySet="BillCompleted" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROrderCom__id_FD__1F98B2C1" Association="RestaurantDBModel.FK__ROrderCom__id_FD__1F98B2C1">
-            <End Role="FoodDrink" EntitySet="FoodDrink" />
-            <End Role="ROrderCompleted" EntitySet="ROrderCompleted" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ROrderCom__id_wa__2180FB33" Association="RestaurantDBModel.FK__ROrderCom__id_wa__2180FB33">
-            <End Role="Waiter" EntitySet="Waiter" />
-            <End Role="ROrderCompleted" EntitySet="ROrderCompleted" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="FoodDrink">
@@ -470,7 +443,6 @@
           <NavigationProperty Name="fdType" Relationship="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A" FromRole="FoodDrink" ToRole="fdType" />
           <NavigationProperty Name="PriceUpdates" Relationship="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99" FromRole="FoodDrink" ToRole="PriceUpdates" />
           <NavigationProperty Name="ROrder" Relationship="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" FromRole="FoodDrink" ToRole="ROrder" />
-          <NavigationProperty Name="ROrderCompleted" Relationship="RestaurantDBModel.FK__ROrderCom__id_FD__1F98B2C1" FromRole="FoodDrink" ToRole="ROrderCompleted" />
         </EntityType>
         <Association Name="FK__FoodDrink__id_ty__267ABA7A">
           <End Type="RestaurantDBModel.fdType" Role="fdType" Multiplicity="1" />
@@ -516,7 +488,7 @@
           <Property Name="tstatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reservation" Relationship="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" FromRole="RTable" ToRole="Reservation" />
           <NavigationProperty Name="Bill" Relationship="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" FromRole="RTable" ToRole="Bill" />
-          <NavigationProperty Name="BillCompleted" Relationship="RestaurantDBModel.FK__BillCompl__id_rt__1BC821DD" FromRole="RTable" ToRole="BillCompleted" />
+          <NavigationProperty Name="BillCompleted" Relationship="RestaurantDBModel.FK__BillCompl__id_rt__3E1D39E1" FromRole="RTable" ToRole="BillCompleted" />
         </EntityType>
         <Association Name="FK__Reservati__id_rt__2E1BDC42">
           <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
@@ -535,37 +507,13 @@
             <PropertyRef Name="id_bill" />
           </Key>
           <Property Name="id_bill" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Bsum" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Bsum" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="id_rtable" Type="Int32" Nullable="false" />
           <Property Name="id_waiter" Type="Int32" Nullable="false" />
           <Property Name="bdatetime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="RTable" Relationship="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" FromRole="Bill" ToRole="RTable" />
           <NavigationProperty Name="Waiter" Relationship="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" FromRole="Bill" ToRole="Waiter" />
           <NavigationProperty Name="ROrder" Relationship="RestaurantDBModel.FK__ROrder__id_bill__38996AB5" FromRole="Bill" ToRole="ROrder" />
-        </EntityType>
-        <EntityType Name="BillCompleted">
-          <Key>
-            <PropertyRef Name="id_bill" />
-          </Key>
-          <Property Name="id_bill" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Bsum" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="id_rtable" Type="Int32" Nullable="false" />
-          <Property Name="id_waiter" Type="Int32" Nullable="false" />
-          <Property Name="bdatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RTable" Relationship="RestaurantDBModel.FK__BillCompl__id_rt__1BC821DD" FromRole="BillCompleted" ToRole="RTable" />
-          <NavigationProperty Name="Waiter" Relationship="RestaurantDBModel.FK__BillCompl__id_wa__1CBC4616" FromRole="BillCompleted" ToRole="Waiter" />
-        </EntityType>
-        <EntityType Name="ROrderCompleted">
-          <Key>
-            <PropertyRef Name="id_order" />
-          </Key>
-          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_FD" Type="Int64" Nullable="false" />
-          <Property Name="id_bill" Type="Int64" Nullable="false" />
-          <Property Name="id_waiter" Type="Int32" Nullable="false" />
-          <Property Name="odatetime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="FoodDrink" Relationship="RestaurantDBModel.FK__ROrderCom__id_FD__1F98B2C1" FromRole="ROrderCompleted" ToRole="FoodDrink" />
-          <NavigationProperty Name="Waiter" Relationship="RestaurantDBModel.FK__ROrderCom__id_wa__2180FB33" FromRole="ROrderCompleted" ToRole="Waiter" />
         </EntityType>
         <Association Name="FK__Bill__id_rtable__33D4B598">
           <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
@@ -603,7 +551,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillCompl__id_rt__1BC821DD">
+        <EntityType Name="BillCompleted">
+          <Key>
+            <PropertyRef Name="id_bill" />
+          </Key>
+          <Property Name="id_bill" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bsum" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="id_rtable" Type="Int32" Nullable="false" />
+          <Property Name="id_waiter" Type="Int32" Nullable="false" />
+          <Property Name="bdatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RTable" Relationship="RestaurantDBModel.FK__BillCompl__id_rt__3E1D39E1" FromRole="BillCompleted" ToRole="RTable" />
+          <NavigationProperty Name="Waiter" Relationship="RestaurantDBModel.FK__BillCompl__id_wa__3F115E1A" FromRole="BillCompleted" ToRole="Waiter" />
+        </EntityType>
+        <EntityType Name="ROrderCompleted">
+          <Key>
+            <PropertyRef Name="id_order" />
+            <PropertyRef Name="id_FD" />
+            <PropertyRef Name="id_bill" />
+            <PropertyRef Name="id_waiter" />
+            <PropertyRef Name="odatetime" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_FD" Type="Int64" Nullable="false" />
+          <Property Name="id_bill" Type="Int64" Nullable="false" />
+          <Property Name="id_waiter" Type="Int32" Nullable="false" />
+          <Property Name="odatetime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__BillCompl__id_rt__3E1D39E1">
           <End Type="RestaurantDBModel.RTable" Role="RTable" Multiplicity="1" />
           <End Type="RestaurantDBModel.BillCompleted" Role="BillCompleted" Multiplicity="*" />
           <ReferentialConstraint>
@@ -615,7 +589,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillCompl__id_wa__1CBC4616">
+        <Association Name="FK__BillCompl__id_wa__3F115E1A">
           <End Type="RestaurantDBModel.Waiter" Role="Waiter" Multiplicity="1" />
           <End Type="RestaurantDBModel.BillCompleted" Role="BillCompleted" Multiplicity="*" />
           <ReferentialConstraint>
@@ -623,30 +597,6 @@
               <PropertyRef Name="id_waiter" />
             </Principal>
             <Dependent Role="BillCompleted">
-              <PropertyRef Name="id_waiter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ROrderCom__id_FD__1F98B2C1">
-          <End Type="RestaurantDBModel.FoodDrink" Role="FoodDrink" Multiplicity="1" />
-          <End Type="RestaurantDBModel.ROrderCompleted" Role="ROrderCompleted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FoodDrink">
-              <PropertyRef Name="id_FD" />
-            </Principal>
-            <Dependent Role="ROrderCompleted">
-              <PropertyRef Name="id_FD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ROrderCom__id_wa__2180FB33">
-          <End Type="RestaurantDBModel.Waiter" Role="Waiter" Multiplicity="1" />
-          <End Type="RestaurantDBModel.ROrderCompleted" Role="ROrderCompleted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Waiter">
-              <PropertyRef Name="id_waiter" />
-            </Principal>
-            <Dependent Role="ROrderCompleted">
               <PropertyRef Name="id_waiter" />
             </Dependent>
           </ReferentialConstraint>
