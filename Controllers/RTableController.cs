@@ -200,8 +200,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 switch (submit)
                 {
                     case "order":
-                        ViewBag.Message = "Customer saved successfully!";
-                        break;
+                        return RedirectToAction("Create/"+ rTable.id_rtable,"ROrder");
                     case "Checkout":
                         var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                         int Wid;

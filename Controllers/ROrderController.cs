@@ -11,18 +11,18 @@ using MVCRestaurant27Tem2022.Models;
 
 namespace MVCRestaurant27Tem2022.Controllers
 {
-    public class ROrdersController : Controller
+    public class ROrderController : Controller
     {
         private RestaurantDBEntities db = new RestaurantDBEntities();
 
-        // GET: ROrders
+        // GET: ROrder
         public async Task<ActionResult> Index()
         {
             var rOrder = db.ROrder.Include(r => r.Waiter).Include(r => r.FoodDrink).Include(r => r.Bill);
             return View(await rOrder.ToListAsync());
         }
 
-        // GET: ROrders/Details/5
+        // GET: ROrder/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,7 +37,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rOrder);
         }
 
-        // GET: ROrders/Create
+        // GET: ROrder/Create
         public ActionResult Create()
         {
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick");
@@ -46,7 +46,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View();
         }
 
-        // POST: ROrders/Create
+        // POST: ROrder/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +66,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rOrder);
         }
 
-        // GET: ROrders/Edit/5
+        // GET: ROrder/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,7 +84,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rOrder);
         }
 
-        // POST: ROrders/Edit/5
+        // POST: ROrder/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -103,7 +103,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rOrder);
         }
 
-        // GET: ROrders/Delete/5
+        // GET: ROrder/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rOrder);
         }
 
-        // POST: ROrders/Delete/5
+        // POST: ROrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
