@@ -40,6 +40,13 @@
     .tableStatusReserved a{
         color: dimgray;
     }
+    .tableStatusUnavailable {
+        background-color: dimgray;
+        color: dimgray;
+    }
+        .tableStatusUnavailable a {
+            color: darkgray;
+        }
     .tableStatusInfo {
         float: left;
         height: 65px;
@@ -73,6 +80,9 @@
         <div class="tableStatus tableStatusReserved tableStatusInfo">
             <h3><a href="">Reserved<span class="tableLink"></span></a></h3>
         </div>
+        <div class="tableStatus tableStatusUnavailable tableStatusInfo">
+            <h3><a href="">Unavailable<span class="tableLink"></span></a></h3>
+        </div>
     </div>
     <div class="tableStatusMain">
         @{int i = 0;}
@@ -90,9 +100,15 @@
                     <h1><a href="@Url.Action("Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }
-            else
+            else if (Convert.ToString(item.tstatus) == "r")
             {
                 <div class="tableStatus tableStatusReserved">
+                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                </div>
+            }
+            else if (Convert.ToString(item.tstatus) == "u")
+            {
+                <div class="tableStatus tableStatusUnavailable">
                     <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }

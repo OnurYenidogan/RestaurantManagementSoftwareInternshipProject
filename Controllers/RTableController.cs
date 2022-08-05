@@ -42,6 +42,10 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return RedirectToAction("Reserved/" + rTable.id_rtable);
             }
+            else if (Convert.ToString(rTable.tstatus) == "u")
+            {
+                return RedirectToAction("Unavailable/" + rTable.id_rtable);
+            }
             return View(rTable);
         }
 
@@ -151,25 +155,88 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Free([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        public ActionResult Free( string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
         {
             if (ModelState.IsValid)
             {
-                var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
-                int Wid;
-                Wid = userInDb.id_waiter;
-                Bill newbill = new Bill();
-                newbill.id_rtable = rTable.id_rtable;
-                newbill.id_waiter =  Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
-                newbill.bdatetime = DateTime.Now;
-                newbill.Bsum = 0;
-                rTable.tstatus = "s";
-                db.Entry(rTable).State = EntityState.Modified;
-                db.SaveChanges();
-                db.Bill.Add(newbill);
-                db.SaveChanges();
-                //ViewBag.Mesaj = "successfully created";
-                return RedirectToAction("Index");
+                switch (submit)
+                {
+                    case "make seated":
+                        var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                        int Wid;
+                        Wid = userInDb.id_waiter;
+                        Bill newbill = new Bill();
+                        newbill.id_rtable = rTable.id_rtable;
+                        newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
+                        newbill.bdatetime = DateTime.Now;
+                        newbill.Bsum = 0;
+                        rTable.tstatus = "s";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        db.Bill.Add(newbill);
+                        db.SaveChanges();
+                        //ViewBag.Mesaj = "successfully created";
+                        return RedirectToAction("Index");
+
+                    case "Unavailable":
+                        rTable.tstatus = "u";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                }
+
+            }
+            return View(rTable);
+        }
+
+        public ActionResult Unavailable(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rTable);
+        }
+        // POST: RTable/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Unavailable(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        {
+            if (ModelState.IsValid)
+            {
+                switch (submit)
+                {
+                    case "make seated":
+                        var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                        int Wid;
+                        Wid = userInDb.id_waiter;
+                        Bill newbill = new Bill();
+                        newbill.id_rtable = rTable.id_rtable;
+                        newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
+                        newbill.bdatetime = DateTime.Now;
+                        newbill.Bsum = 0;
+                        rTable.tstatus = "s";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        db.Bill.Add(newbill);
+                        db.SaveChanges();
+                        //ViewBag.Mesaj = "successfully created";
+                        return RedirectToAction("Index");
+
+                    case "Free":
+                        rTable.tstatus = "f";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                }
+
             }
             return View(rTable);
         }
