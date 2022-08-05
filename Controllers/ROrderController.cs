@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -16,20 +15,20 @@ namespace MVCRestaurant27Tem2022.Controllers
         private RestaurantDBEntities db = new RestaurantDBEntities();
 
         // GET: ROrder
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var rOrder = db.ROrder.Include(r => r.Waiter).Include(r => r.FoodDrink).Include(r => r.Bill);
-            return View(await rOrder.ToListAsync());
+            return View(rOrder.ToList());
         }
 
         // GET: ROrder/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROrder rOrder = await db.ROrder.FindAsync(id);
+            ROrder rOrder = db.ROrder.Find(id);
             if (rOrder == null)
             {
                 return HttpNotFound();
@@ -38,18 +37,8 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
 
         // GET: ROrder/Create
-
-        public ActionResult Create(int? id)
+        public ActionResult Create()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RTable rTable = db.RTable.Find(id);
-            if (rTable == null)
-            {
-                return HttpNotFound();
-            }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick");
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname");
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill");
@@ -60,15 +49,14 @@ namespace MVCRestaurant27Tem2022.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-     //   [Route("{id?}")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ROrder rOrder,string id)
+        public ActionResult Create(ROrder rOrder, string id)
         {
             if (ModelState.IsValid)
             {
                 int idInt = Convert.ToInt32(id);
                 var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == idInt);
-                var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD );
+                var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
                 rOrder.id_bill = billInDb.id_bill;
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
@@ -78,7 +66,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 rOrder.odatetime = DateTime.Now;
                 db.ROrder.Add(rOrder);
                 db.Entry(billInDb).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
@@ -86,14 +74,15 @@ namespace MVCRestaurant27Tem2022.Controllers
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
+
         // GET: ROrder/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROrder rOrder = await db.ROrder.FindAsync(id);
+            ROrder rOrder = db.ROrder.Find(id);
             if (rOrder == null)
             {
                 return HttpNotFound();
@@ -103,17 +92,18 @@ namespace MVCRestaurant27Tem2022.Controllers
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
+
         // POST: ROrder/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id_order,id_FD,id_bill,id_waiter,odatetime")] ROrder rOrder)
+        public ActionResult Edit([Bind(Include = "id_order,id_FD,id_bill,id_waiter,odatetime")] ROrder rOrder)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(rOrder).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
@@ -121,29 +111,52 @@ namespace MVCRestaurant27Tem2022.Controllers
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
+
         // GET: ROrder/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ROrder rOrder = await db.ROrder.FindAsync(id);
+            ROrder rOrder = db.ROrder.Find(id);
             if (rOrder == null)
             {
                 return HttpNotFound();
             }
             return View(rOrder);
         }
+
         // POST: ROrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            ROrder rOrder = await db.ROrder.FindAsync(id);
-            db.ROrder.Remove(rOrder);
-            await db.SaveChangesAsync();
+
+            ROrder rOrder = db.ROrder.Find(id);
+            ROrderCompleted rOrderCompleted = new ROrderCompleted();
+            int idInt = Convert.ToInt32(rOrder.id_bill);
+            var billInDb = db.Bill.FirstOrDefault(y => y.id_bill == idInt);
+            var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
+            billInDb.Bsum = billInDb.Bsum + FoodInDb.price;
+            rOrderCompleted.id_FD = rOrder.id_FD;
+            rOrderCompleted.id_bill = rOrder.id_bill;
+            rOrderCompleted.id_waiter = rOrder.id_waiter;
+            rOrderCompleted.odatetime = rOrder.odatetime;
+
+            db.ROrderCompleted.Add(rOrderCompleted);
+            db.SaveChanges();
+            db.Entry(billInDb).State = EntityState.Modified;
+            db.SaveChanges();
+            //db.ROrder.Remove(rOrder);
+            db.SaveChanges();
             return RedirectToAction("Index");
+
+
+            //ROrder rOrder = db.ROrder.Find(id);
+            //db.ROrder.Remove(rOrder);
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)
         {

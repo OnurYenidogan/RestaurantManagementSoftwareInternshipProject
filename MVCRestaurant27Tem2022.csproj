@@ -133,6 +133,7 @@
     <Compile Include="Controllers\FoodDrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\oldROrderController.cs" />
     <Compile Include="Controllers\ROrderController.cs" />
     <Compile Include="Controllers\RTableController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
