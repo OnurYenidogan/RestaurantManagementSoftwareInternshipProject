@@ -60,12 +60,12 @@ namespace MVCRestaurant27Tem2022.Controllers
                 rOrder.id_bill = billInDb.id_bill;
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
-                billInDb.Bsum = billInDb.Bsum + FoodInDb.price;
+                //billInDb.Bsum = billInDb.Bsum + FoodInDb.price;
                 Wid = userInDb.id_waiter;
                 rOrder.id_waiter = Wid;
                 rOrder.odatetime = DateTime.Now;
                 db.ROrder.Add(rOrder);
-                db.Entry(billInDb).State = EntityState.Modified;
+                //db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -148,7 +148,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             db.SaveChanges();
             db.Entry(billInDb).State = EntityState.Modified;
             db.SaveChanges();
-            //db.ROrder.Remove(rOrder);
+            db.ROrder.Remove(rOrder);
             db.SaveChanges();
             return RedirectToAction("Index");
 
