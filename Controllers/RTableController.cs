@@ -216,7 +216,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                         int dltID = Convert.ToInt32(billInDb.id_bill);
                         Bill deletebill =  db.Bill.Find(dltID);
                         db.Bill.Remove(deletebill);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                         //billInDb.ispaid = true;
                         db.BillCompleted.Add(newbillComp);
                         db.Entry(rTable).State = EntityState.Modified;
