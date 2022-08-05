@@ -68,13 +68,16 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 int idInt = Convert.ToInt32(id);
                 var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == idInt);
+                var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD );
                 rOrder.id_bill = billInDb.id_bill;
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
+                billInDb.Bsum = billInDb.Bsum + FoodInDb.price;
                 Wid = userInDb.id_waiter;
                 rOrder.id_waiter = Wid;
                 rOrder.odatetime = DateTime.Now;
                 db.ROrder.Add(rOrder);
+                db.Entry(billInDb).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
