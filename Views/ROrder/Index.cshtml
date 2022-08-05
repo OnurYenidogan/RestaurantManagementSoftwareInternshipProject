@@ -41,9 +41,10 @@
             @Html.DisplayFor(modelItem => item.Bill.id_bill)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_order }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_order }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_order })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.id_order }) |*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.id_order }) |*@
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.id_order })*@
+            @Html.ActionLink("Complete", "Delete", new { id = item.id_order })
         </td>
     </tr>
 }
