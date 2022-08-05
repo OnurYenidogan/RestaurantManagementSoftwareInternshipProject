@@ -184,7 +184,8 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return HttpNotFound();
             }
-
+            var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
+            ViewBag.BillSum =  Convert.ToDecimal(billInDb.Bsum) + "₺";
 
             return View(rTable);
         }
