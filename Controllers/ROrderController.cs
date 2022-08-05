@@ -78,13 +78,11 @@ namespace MVCRestaurant27Tem2022.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
-
         // GET: ROrder/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
@@ -102,7 +100,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
-
         // POST: ROrder/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -121,7 +118,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
             return View(rOrder);
         }
-
         // GET: ROrder/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
@@ -136,7 +132,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             return View(rOrder);
         }
-
         // POST: ROrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -147,7 +142,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

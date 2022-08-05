@@ -209,7 +209,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                         var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
                         rTable.tstatus = "f";
                         BillCompleted newbillComp= new BillCompleted();
-                        newbillComp.Bsum = Convert.ToInt32(billInDb.Bsum);//Küsüratı aktarmaz bu şekilde!!!!!!
+                        newbillComp.Bsum = billInDb.Bsum;
                         newbillComp.id_rtable = billInDb.id_rtable;
                         newbillComp.id_waiter = billInDb.id_waiter;
                         newbillComp.bdatetime = billInDb.bdatetime;
