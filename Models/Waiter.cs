@@ -17,9 +17,9 @@ namespace MVCRestaurant27Tem2022.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Waiter()
         {
-            this.ROrder = new HashSet<ROrder>();
             this.Bill = new HashSet<Bill>();
             this.BillCompleted = new HashSet<BillCompleted>();
+            this.ROrder = new HashSet<ROrder>();
         }
     
         public int id_waiter { get; set; }
@@ -29,10 +29,10 @@ namespace MVCRestaurant27Tem2022.Models
         public bool isAdmin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROrder> ROrder { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillCompleted> BillCompleted { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROrder> ROrder { get; set; }
     }
 }

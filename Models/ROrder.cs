@@ -20,8 +20,8 @@ namespace MVCRestaurant27Tem2022.Models
         public int id_waiter { get; set; }
         public System.DateTime odatetime { get; set; }
     
-        public virtual Waiter Waiter { get; set; }
-        public virtual FoodDrink FoodDrink { get; set; }
         public virtual Bill Bill { get; set; }
+        public virtual FoodDrink FoodDrink { get; set; }
+        public virtual Waiter Waiter { get; set; }
     }
 }

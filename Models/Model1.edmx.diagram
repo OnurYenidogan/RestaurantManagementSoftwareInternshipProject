@@ -8,24 +8,24 @@
         <EntityTypeShape EntityType="RestaurantDBModel.fdType" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.PriceUpdates" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.Reservation" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantDBModel.ROrder" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantDBModel.Waiter" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_waite__398D8EEE" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RestaurantDBModel.FoodDrink" Width="1.5" PointX="5.25" PointY="1.875" />
         <AssociationConnector Association="RestaurantDBModel.FK__FoodDrink__id_ty__267ABA7A" />
         <AssociationConnector Association="RestaurantDBModel.FK__PriceUpda__id_FD__3C69FB99" />
-        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_FD__37A5467C" />
         <EntityTypeShape EntityType="RestaurantDBModel.RTable" Width="1.5" PointX="0.75" PointY="11" />
         <AssociationConnector Association="RestaurantDBModel.FK__Reservati__id_rt__2E1BDC42" />
-        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="11.875" />
-        <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_rtable__33D4B598" />
-        <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_waiter__34C8D9D1" />
-        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_bill__38996AB5" />
-        <EntityTypeShape EntityType="RestaurantDBModel.BillCompleted" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="RestaurantDBModel.Bill" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="RestaurantDBModel.BillCompleted" Width="1.5" PointX="8.25" PointY="6.75" />
+        <EntityTypeShape EntityType="RestaurantDBModel.ROrder" Width="1.5" PointX="10.5" PointY="4.75" />
         <EntityTypeShape EntityType="RestaurantDBModel.ROrderCompleted" Width="1.5" PointX="7.375" PointY="0.75" />
-        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_rt__3E1D39E1" />
-        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_wa__3F115E1A" />
+        <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_rtable__47A6A41B" />
+        <AssociationConnector Association="RestaurantDBModel.FK__Bill__id_waiter__489AC854" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_bill__4C6B5938" />
+        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_rt__503BEA1C" />
+        <AssociationConnector Association="RestaurantDBModel.FK__BillCompl__id_wa__51300E55" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_FD__4B7734FF" />
+        <AssociationConnector Association="RestaurantDBModel.FK__ROrder__id_waite__4D5F7D71" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
