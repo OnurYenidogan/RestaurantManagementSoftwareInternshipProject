@@ -254,7 +254,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\denemeEdit.cshtml" />
-    <Content Include="Views\RTable\Create.cshtml" />
+    <Content Include="Views\AdminPanel\TableCreate.cshtml" />
     <Content Include="Views\RTable\Delete.cshtml" />
     <Content Include="Views\RTable\Details.cshtml" />
     <Content Include="Views\RTable\Edit.cshtml" />

@@ -102,5 +102,26 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             return View(rTable);
         }
+        public ActionResult TableCreate()
+        {
+            return View();
+        }
+
+        // POST: RTable/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TableCreate([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        {
+            if (ModelState.IsValid)
+            {
+                db.RTable.Add(rTable);
+                db.SaveChanges();
+                return RedirectToAction("Table");
+            }
+
+            return View(rTable);
+        }
     }
 }
