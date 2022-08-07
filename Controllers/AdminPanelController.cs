@@ -20,12 +20,12 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 case "Table":
                     return RedirectToAction("Table");
-
                 case "Categories":
                     return RedirectToAction("Index", "fdType");
-
                 case "Menu Items":
                     return RedirectToAction("Index", "FoodDrink");
+                case "Waiter Management":
+                    return RedirectToAction("Index", "Waiter");
             }
             return View();
         }
