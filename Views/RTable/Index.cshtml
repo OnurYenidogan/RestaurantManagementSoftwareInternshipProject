@@ -41,11 +41,11 @@
     .tableStatusReserved a{
         color: dimgray;
     }
-    .tableStatusUnavailable {
+    .tableStatusRemoved {
         background-color: dimgray;
         color: dimgray;
     }
-        .tableStatusUnavailable a {
+        .tableStatusRemoved a {
             color: darkgray;
         }
     .tableStatusInfo {
@@ -81,8 +81,8 @@
         <div class="tableStatus tableStatusReserved tableStatusInfo">
             <h3><a href="">Reserved<span class="tableLink"></span></a></h3>
         </div>
-        <div class="tableStatus tableStatusUnavailable tableStatusInfo">
-            <h3><a href="">Unavailable<span class="tableLink"></span></a></h3>
+        <div class="tableStatus tableStatusRemoved tableStatusInfo">
+            <h3><a href="">Removed<span class="tableLink"></span></a></h3>
         </div>
     </div>
     <div class="tableStatusMain">
@@ -109,7 +109,7 @@
             }
             else if (Convert.ToString(item.tstatus) == "u")
             {
-                <div class="tableStatus tableStatusUnavailable">
+                <div class="tableStatus tableStatusRemoved">
                     <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }

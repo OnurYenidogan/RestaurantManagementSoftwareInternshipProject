@@ -42,9 +42,9 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return RedirectToAction("Reserved/" + rTable.id_rtable);
             }
-            else if (Convert.ToString(rTable.tstatus) == "u")
+            else if (Convert.ToString(rTable.tstatus) == "x")
             {
-                return RedirectToAction("Unavailable/" + rTable.id_rtable);
+                return RedirectToAction("Removed/" + rTable.id_rtable);
             }
             return View(rTable);
         }
@@ -178,7 +178,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                         //ViewBag.Mesaj = "successfully created";
                         return RedirectToAction("Index");
 
-                    case "Unavailable":
+                    case "Removed":
                         rTable.tstatus = "u";
                         db.Entry(rTable).State = EntityState.Modified;
                         db.SaveChanges();
@@ -189,7 +189,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             return View(rTable);
         }
 
-        public ActionResult Unavailable(int? id)
+        public ActionResult Removed(int? id)
         {
             if (id == null)
             {
@@ -207,7 +207,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Unavailable(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        public ActionResult Removed(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
         {
             if (ModelState.IsValid)
             {
