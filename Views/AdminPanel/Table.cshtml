@@ -41,13 +41,13 @@
     .tableStatusReserved a{
         color: dimgray;
     }
-    .tableStatusUnavailable {
+    .tableStatusRemoved {
         background-color: dimgray;
         color: dimgray;
     }
-        .tableStatusUnavailable a {
+    .tableStatusRemoved a {
             color: darkgray;
-        }
+    }
     .tableStatusInfo {
         float: left;
         height: 65px;
@@ -69,21 +69,22 @@
     <h2>Table Status</h2>
     <div class="tableStatusFree"></div>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <h2>@Html.ActionLink("Create New", "Create")</h2>
     </p>
     <div>
         <div class="tableStatus tableStatusFree tableStatusInfo">
-            <h3><a href="">Free<span class="tableLink"></span></a></h3>
+            <h3><a >Free<span class="tableLink"></span></a></h3>
         </div>
         <div class="tableStatus tableStatusSeated tableStatusInfo">
-            <h3><a href="">Seated<span class="tableLink"></span></a></h3>
+            <h3><a >Seated<span class="tableLink"></span></a></h3>
         </div>
         <div class="tableStatus tableStatusReserved tableStatusInfo">
-            <h3><a href="">Reserved<span class="tableLink"></span></a></h3>
+            <h3><a >Reserved<span class="tableLink"></span></a></h3>
         </div>
-        <div class="tableStatus tableStatusUnavailable tableStatusInfo">
-            <h3><a href="">Unavailable<span class="tableLink"></span></a></h3>
+        <div class="tableStatus tableStatusRemoved tableStatusInfo">
+            <h3><a >Removed<span class="tableLink"></span></a></h3>
         </div>
+        <h2 style="color:red">You can only remove "Free" tables</h2>
     </div>
     <div class="tableStatusMain">
         @{int i = 0;}
@@ -92,25 +93,25 @@
             if (Convert.ToString(item.tstatus) == "f")
             {
                 <div class="tableStatus tableStatusFree">
-                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                    <h1><a href="@Url.Action( "FreeTable", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }
             else if (Convert.ToString(item.tstatus) == "s")
             {
                 <div class="tableStatus tableStatusSeated">
-                    <h1><a href="@Url.Action("Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                    <h1><a>@Html.DisplayFor(modelItem => item.id_rtable)</a></h1>
                 </div>
             }
             else if (Convert.ToString(item.tstatus) == "r")
             {
                 <div class="tableStatus tableStatusReserved">
-                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                    <h1><a>@Html.DisplayFor(modelItem => item.id_rtable)</a></h1>
                 </div>
             }
-            else if (Convert.ToString(item.tstatus) == "u")
+            else if (Convert.ToString(item.tstatus) == "x")
             {
-                <div class="tableStatus tableStatusUnavailable">
-                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                <div class="tableStatus tableStatusRemoved">
+                    <h1><a href="@Url.Action( "RemovedTable", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }
         }

@@ -285,6 +285,8 @@
     <Content Include="Views\RTable\Unavailable.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Views\AdminPanel\Table.cshtml" />
+    <Content Include="Views\AdminPanel\FreeTable.cshtml" />
+    <Content Include="Views\AdminPanel\RemovedTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

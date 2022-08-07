@@ -113,6 +113,10 @@
                     <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
                 </div>
             }
+            else if (Convert.ToString(item.tstatus) == "x")
+            {
+
+            }
         }
     </div>
 </div>
