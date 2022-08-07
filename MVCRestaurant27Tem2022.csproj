@@ -130,11 +130,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\ApplicationDbContext.cs" />
+    <Compile Include="Controllers\BillCompletedController.cs" />
     <Compile Include="Controllers\fdTypeController.cs" />
     <Compile Include="Controllers\FoodDrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\oldROrderController.cs" />
+    <Compile Include="Controllers\ROrderCompletedController.cs" />
     <Compile Include="Controllers\ROrderController.cs" />
     <Compile Include="Controllers\RTableController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
@@ -287,6 +289,16 @@
     <Content Include="Views\AdminPanel\Table.cshtml" />
     <Content Include="Views\AdminPanel\FreeTable.cshtml" />
     <Content Include="Views\AdminPanel\RemovedTable.cshtml" />
+    <Content Include="Views\BillCompleted\Create.cshtml" />
+    <Content Include="Views\BillCompleted\Delete.cshtml" />
+    <Content Include="Views\BillCompleted\Details.cshtml" />
+    <Content Include="Views\BillCompleted\Edit.cshtml" />
+    <Content Include="Views\BillCompleted\Index.cshtml" />
+    <Content Include="Views\ROrderCompleted\Create.cshtml" />
+    <Content Include="Views\ROrderCompleted\Delete.cshtml" />
+    <Content Include="Views\ROrderCompleted\Details.cshtml" />
+    <Content Include="Views\ROrderCompleted\Edit.cshtml" />
+    <Content Include="Views\ROrderCompleted\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

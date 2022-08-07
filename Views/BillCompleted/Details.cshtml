@@ -1,0 +1,50 @@
+﻿@model MVCRestaurant27Tem2022.Models.BillCompleted
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BillCompleted</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bsum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bsum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bdatetime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bdatetime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RTable.tstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RTable.tstatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Waiter.Wnick)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Waiter.Wnick)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_bill }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

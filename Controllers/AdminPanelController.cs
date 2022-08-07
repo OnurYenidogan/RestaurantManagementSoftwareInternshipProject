@@ -26,6 +26,10 @@ namespace MVCRestaurant27Tem2022.Controllers
                     return RedirectToAction("Index", "FoodDrink");
                 case "Waiter Management":
                     return RedirectToAction("Index", "Waiter");
+                case "Bill History":
+                    return RedirectToAction("Index", "BillCompleted");
+                case "Order History":
+                    return RedirectToAction("Index", "ROrderCompleted");
             }
             return View();
         }
