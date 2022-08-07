@@ -148,6 +148,10 @@ namespace MVCRestaurant27Tem2022.Controllers
             {
                 return HttpNotFound();
             }
+            else if (rTable.tstatus == "x")
+            {
+                return RedirectToAction("Removed/" + rTable.id_rtable);
+            }
             return View(rTable);
         }
         // POST: RTable/Edit/5
@@ -202,44 +206,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             return View(rTable);
         }
-        // POST: RTable/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Removed(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
-        {
-            if (ModelState.IsValid)
-            {
-                switch (submit)
-                {
-                    case "make seated":
-                        var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
-                        int Wid;
-                        Wid = userInDb.id_waiter;
-                        Bill newbill = new Bill();
-                        newbill.id_rtable = rTable.id_rtable;
-                        newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
-                        newbill.bdatetime = DateTime.Now;
-                        newbill.Bsum = 0;
-                        rTable.tstatus = "s";
-                        db.Entry(rTable).State = EntityState.Modified;
-                        db.SaveChanges();
-                        db.Bill.Add(newbill);
-                        db.SaveChanges();
-                        //ViewBag.Mesaj = "successfully created";
-                        return RedirectToAction("Index");
 
-                    case "Free":
-                        rTable.tstatus = "f";
-                        db.Entry(rTable).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                }
-
-            }
-            return View(rTable);
-        }
         public ActionResult Seated(int? id)
         {
             if (id == null)
@@ -250,6 +217,10 @@ namespace MVCRestaurant27Tem2022.Controllers
             if (rTable == null)
             {
                 return HttpNotFound();
+            }
+            else if (rTable.tstatus == "x")
+            {
+                return RedirectToAction("Removed/" + rTable.id_rtable);
             }
             var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
             ViewBag.BillSum =  Convert.ToDecimal(billInDb.Bsum) + "₺";
@@ -308,6 +279,10 @@ namespace MVCRestaurant27Tem2022.Controllers
             if (rTable == null)
             {
                 return HttpNotFound();
+            }
+            else if (rTable.tstatus == "x")
+            {
+                return RedirectToAction("Removed/" + rTable.id_rtable);
             }
             return View(rTable);
         }
