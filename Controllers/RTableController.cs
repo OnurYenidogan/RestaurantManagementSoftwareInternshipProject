@@ -181,12 +181,6 @@ namespace MVCRestaurant27Tem2022.Controllers
                         db.SaveChanges();
                         //ViewBag.Mesaj = "successfully created";
                         return RedirectToAction("Index");
-
-                    case "Removed":
-                        rTable.tstatus = "u";
-                        db.Entry(rTable).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
                 }
 
             }
