@@ -112,10 +112,11 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TableCreate([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        public ActionResult TableCreate([Bind(Include = "id_rtable")] RTable rTable)
         {
             if (ModelState.IsValid)
             {
+                rTable.tstatus = "f";
                 db.RTable.Add(rTable);
                 db.SaveChanges();
                 return RedirectToAction("Table");
