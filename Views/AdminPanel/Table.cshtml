@@ -1,0 +1,151 @@
+﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.RTable>
+<style>
+    .contentMain {
+        float: left;
+    }
+    .tableStatusMain {
+        margin: 1%;
+        float: right;
+    }
+    .tableStatus {
+        border-radius: 10%;
+        background-color: greenyellow;
+        float: left;
+        width: 14%;
+        padding: 10px;
+        height: 100px;
+        margin: 1%;
+        text-align: center;
+        position: relative;
+    }
+    .tableStatusFree {
+        background-color: springgreen;
+    }
+    .tableStatusFree a{
+        /*color:red;*/
+        color:lightseagreen;
+    }
+    .tableStatusSeated a {
+        color: midnightblue;
+    }
+    .tableStatusSeated {
+        /*background-color: rgb(42, 0, 181);*/
+        background-color: royalblue;
+        /*color: black;*/
+
+    }
+    .tableStatusReserved {
+        background-color: rgb(235, 158, 52);
+        color: dimgray;
+    }
+    .tableStatusReserved a{
+        color: dimgray;
+    }
+    .tableStatusUnavailable {
+        background-color: dimgray;
+        color: dimgray;
+    }
+        .tableStatusUnavailable a {
+            color: darkgray;
+        }
+    .tableStatusInfo {
+        float: left;
+        height: 65px;
+        margin: 1%;
+        padding: 0px;
+        min-width: 120px;
+    }
+    .tableLink {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+</style>
+<div class="contentMain">
+    @{ViewBag.Title = "Tables";}
+    <h2>Table Status</h2>
+    <div class="tableStatusFree"></div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div>
+        <div class="tableStatus tableStatusFree tableStatusInfo">
+            <h3><a href="">Free<span class="tableLink"></span></a></h3>
+        </div>
+        <div class="tableStatus tableStatusSeated tableStatusInfo">
+            <h3><a href="">Seated<span class="tableLink"></span></a></h3>
+        </div>
+        <div class="tableStatus tableStatusReserved tableStatusInfo">
+            <h3><a href="">Reserved<span class="tableLink"></span></a></h3>
+        </div>
+        <div class="tableStatus tableStatusUnavailable tableStatusInfo">
+            <h3><a href="">Unavailable<span class="tableLink"></span></a></h3>
+        </div>
+    </div>
+    <div class="tableStatusMain">
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+            if (Convert.ToString(item.tstatus) == "f")
+            {
+                <div class="tableStatus tableStatusFree">
+                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                </div>
+            }
+            else if (Convert.ToString(item.tstatus) == "s")
+            {
+                <div class="tableStatus tableStatusSeated">
+                    <h1><a href="@Url.Action("Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                </div>
+            }
+            else if (Convert.ToString(item.tstatus) == "r")
+            {
+                <div class="tableStatus tableStatusReserved">
+                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                </div>
+            }
+            else if (Convert.ToString(item.tstatus) == "u")
+            {
+                <div class="tableStatus tableStatusUnavailable">
+                    <h1><a href="@Url.Action( "Details", new { id = item.id_rtable })">@Html.DisplayFor(modelItem => item.id_rtable)<span class="tableLink"></span></a></h1>
+                </div>
+            }
+        }
+    </div>
+</div>
+@*@model IEnumerable<MVCRestaurant27Tem2022.Models.RTable>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tstatus)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tstatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id_rtable }) |
+                @Html.ActionLink("Details", "Details", new { id=item.id_rtable }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id_rtable })
+            </td>
+        </tr>
+    }
+
+    </table>*@
