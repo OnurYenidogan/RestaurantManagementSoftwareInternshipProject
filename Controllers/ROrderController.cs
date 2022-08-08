@@ -67,7 +67,8 @@ namespace MVCRestaurant27Tem2022.Controllers
                 db.ROrder.Add(rOrder);
                 //db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Create/" + id);
             }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);
@@ -132,7 +133,6 @@ namespace MVCRestaurant27Tem2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CompleteConfirmed(int id)
         {
-
             ROrder rOrder = db.ROrder.Find(id);
             ROrderCompleted rOrderCompleted = new ROrderCompleted();
             int idInt = Convert.ToInt32(rOrder.id_bill);
@@ -143,7 +143,6 @@ namespace MVCRestaurant27Tem2022.Controllers
             rOrderCompleted.id_bill = rOrder.id_bill;
             rOrderCompleted.id_waiter = rOrder.id_waiter;
             rOrderCompleted.odatetime = rOrder.odatetime;
-
             db.ROrderCompleted.Add(rOrderCompleted);
             db.SaveChanges();
             db.Entry(billInDb).State = EntityState.Modified;
@@ -151,6 +150,7 @@ namespace MVCRestaurant27Tem2022.Controllers
             db.ROrder.Remove(rOrder);
             db.SaveChanges();
             return RedirectToAction("Index");
+
 
 
             //ROrder rOrder = db.ROrder.Find(id);
