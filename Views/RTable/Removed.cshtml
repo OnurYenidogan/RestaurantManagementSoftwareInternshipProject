@@ -1,22 +1,16 @@
 ﻿@model MVCRestaurant27Tem2022.Models.RTable
-
-
-    @ViewBag.Title
-
-
-<h2>Edit</h2>
-
-
+@{
+    ViewBag.Title = "Easter Egg";
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>RTable</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <h1 style="color:red">What!? You're trying to break it aren't you? Get back to work before get fired!😡</h1>
+        <h1 style="color:red">What!? You're trying to break it aren't you? Get back to work before get fired!😡</h1>
     </div>
 }
 

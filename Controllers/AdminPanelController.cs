@@ -16,6 +16,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         // GET: AdminPanel
         public ActionResult Index(string submit)
         {
+            ViewBag.Title = "Admin Panel";
             switch (submit)
             {
                 case "Table":
