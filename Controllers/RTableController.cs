@@ -161,6 +161,9 @@ namespace MVCRestaurant27Tem2022.Controllers
                         db.SaveChanges();
                         //ViewBag.Mesaj = "successfully created";
                         return RedirectToAction("Index");
+                    case "Reservation":
+                        return RedirectToAction("Create/" + rTable.id_rtable,"Reservation");
+
                 }
 
             }

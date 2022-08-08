@@ -48,10 +48,12 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_res,id_rtable,rdatetime,phone,rname,rsurname")] Reservation reservation)
+        //public ActionResult Create([Bind(Include = "id_res,id_rtable,rdatetime,phone,rname,rsurname")] Reservation reservation)
+        public ActionResult Create(Reservation reservation, string id)
         {
             if (ModelState.IsValid)
             {
+                reservation.id_rtable = Convert.ToInt32(id);
                 var tableInDb = db.RTable.FirstOrDefault(x => x.id_rtable == reservation.id_rtable);
                 tableInDb.tstatus = "r";
                 db.Reservation.Add(reservation);
