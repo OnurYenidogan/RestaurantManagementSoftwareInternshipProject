@@ -50,10 +50,11 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ROrder rOrder, string id)
+        public ActionResult Create(ROrder rOrder, string id, int numberOfOrders)
         {
             if (ModelState.IsValid)
             {
+                
                 int idInt = Convert.ToInt32(id);
                 var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == idInt);
                 var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
@@ -64,7 +65,11 @@ namespace MVCRestaurant27Tem2022.Controllers
                 Wid = userInDb.id_waiter;
                 rOrder.id_waiter = Wid;
                 rOrder.odatetime = DateTime.Now;
-                db.ROrder.Add(rOrder);
+                for (int i = 0; i < numberOfOrders; i++)
+                {
+                    db.ROrder.Add(rOrder);
+                    db.SaveChanges();
+                }
                 //db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
                 //return RedirectToAction("Index");
