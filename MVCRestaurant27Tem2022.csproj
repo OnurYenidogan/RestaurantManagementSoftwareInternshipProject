@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\oldROrderController.cs" />
+    <Compile Include="Controllers\ReservationHistoryController.cs" />
     <Compile Include="Controllers\ROrderCompletedController.cs" />
     <Compile Include="Controllers\ROrderController.cs" />
     <Compile Include="Controllers\RTableController.cs" />
@@ -176,6 +177,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reservation.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReservationHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ROrder.cs">
@@ -300,6 +304,11 @@
     <Content Include="Views\ROrderCompleted\Edit.cshtml" />
     <Content Include="Views\ROrderCompleted\Index.cshtml" />
     <Content Include="Views\ROrder\Delete.cshtml" />
+    <Content Include="Views\ReservationHistory\Create.cshtml" />
+    <Content Include="Views\ReservationHistory\Delete.cshtml" />
+    <Content Include="Views\ReservationHistory\Details.cshtml" />
+    <Content Include="Views\ReservationHistory\Edit.cshtml" />
+    <Content Include="Views\ReservationHistory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
