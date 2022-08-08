@@ -113,7 +113,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
 
         // GET: ROrder/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Complete(int? id)
         {
             if (id == null)
             {
@@ -128,9 +128,9 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
 
         // POST: ROrder/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Complete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult CompleteConfirmed(int id)
         {
 
             ROrder rOrder = db.ROrder.Find(id);
@@ -157,6 +157,30 @@ namespace MVCRestaurant27Tem2022.Controllers
             //db.ROrder.Remove(rOrder);
             //db.SaveChanges();
             //return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ROrder rOrder = db.ROrder.Find(id);
+            if (rOrder == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rOrder);
+        }
+
+        // POST: ROrder/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            ROrder rOrder = db.ROrder.Find(id);
+            db.ROrder.Remove(rOrder);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         protected override void Dispose(bool disposing)
         {

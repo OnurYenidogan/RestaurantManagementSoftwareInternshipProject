@@ -198,8 +198,13 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
             ViewBag.BillSum =  Convert.ToDecimal(billInDb.Bsum) + "₺";
+            var orderInDb = db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);
+            if (orderInDb != null)
+            {
+                ViewBag.Error = "Before checkout there shouldn't be any incomplete order. Complete or cancel any incomplete order for this table before checkout.";
+            }
 
-            return View(rTable);
+                return View(rTable);
         }
         // POST: RTable/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -215,30 +220,38 @@ namespace MVCRestaurant27Tem2022.Controllers
                     case "order":
                         return RedirectToAction("Create/"+ rTable.id_rtable,"ROrder");
                     case "Checkout":
-                        var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
-                        int Wid;
-                        Wid = userInDb.id_waiter;
-                        //FoodDrink foodDrink = db.FoodDrink.Find(id);
                         var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
-                        rTable.tstatus = "f";
-                        BillCompleted newbillComp= new BillCompleted();
-                        newbillComp.Bsum = billInDb.Bsum;
-                        newbillComp.id_rtable = billInDb.id_rtable;
-                        newbillComp.id_waiter = billInDb.id_waiter;
-                        newbillComp.bdatetime = billInDb.bdatetime;
-                        int dltID = Convert.ToInt32(billInDb.id_bill);
-                        Bill deletebill =  db.Bill.Find(dltID);
-                        db.Bill.Remove(deletebill);
-                        db.SaveChanges();
-                        //billInDb.ispaid = true;
-                        db.BillCompleted.Add(newbillComp);
-                        db.Entry(rTable).State = EntityState.Modified;
-                        //db.Entry(billInDb).State = EntityState.Modified;
-                        db.SaveChanges();
-                        //billInDb = await db.ROrder.FindAsync(id);
-                        //await db.SaveChangesAsync();
-                        //ViewBag.Mesaj = "successfully created";
-                        return RedirectToAction("Index");
+                        var orderInDb= db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);
+                        if (orderInDb == null)
+                        {
+                            var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                            int Wid;
+                            Wid = userInDb.id_waiter;
+                            //FoodDrink foodDrink = db.FoodDrink.Find(id);
+                            rTable.tstatus = "f";
+                            BillCompleted newbillComp = new BillCompleted();
+                            newbillComp.Bsum = billInDb.Bsum;
+                            newbillComp.id_rtable = billInDb.id_rtable;
+                            newbillComp.id_waiter = billInDb.id_waiter;
+                            newbillComp.bdatetime = billInDb.bdatetime;
+                            int dltID = Convert.ToInt32(billInDb.id_bill);
+                            Bill deletebill = db.Bill.Find(dltID);
+                            db.Bill.Remove(deletebill);
+                            db.SaveChanges();
+                            //billInDb.ispaid = true;
+                            db.BillCompleted.Add(newbillComp);
+                            db.Entry(rTable).State = EntityState.Modified;
+                            //db.Entry(billInDb).State = EntityState.Modified;
+                            db.SaveChanges();
+                            //billInDb = await db.ROrder.FindAsync(id);
+                            //await db.SaveChangesAsync();
+                            //ViewBag.Mesaj = "successfully created";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Seated/" + rTable.id_rtable);
+                        }
                 }
             }
             return View(rTable);

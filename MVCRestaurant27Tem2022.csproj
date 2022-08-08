@@ -280,7 +280,7 @@
     <Content Include="Views\Waiter\Edit.cshtml" />
     <Content Include="Views\Waiter\Index.cshtml" />
     <Content Include="Views\ROrder\Create.cshtml" />
-    <Content Include="Views\ROrder\Delete.cshtml" />
+    <Content Include="Views\ROrder\Complete.cshtml" />
     <Content Include="Views\ROrder\Details.cshtml" />
     <Content Include="Views\ROrder\Edit.cshtml" />
     <Content Include="Views\ROrder\Index.cshtml" />
@@ -299,6 +299,7 @@
     <Content Include="Views\ROrderCompleted\Details.cshtml" />
     <Content Include="Views\ROrderCompleted\Edit.cshtml" />
     <Content Include="Views\ROrderCompleted\Index.cshtml" />
+    <Content Include="Views\ROrder\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
