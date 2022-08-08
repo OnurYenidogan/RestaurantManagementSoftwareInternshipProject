@@ -119,6 +119,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
         public ActionResult Free(int? id)
         {
+            ViewBag.Title = "#"+id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -186,6 +187,7 @@ namespace MVCRestaurant27Tem2022.Controllers
 
         public ActionResult Seated(int? id)
         {
+            ViewBag.Title = "#" + id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -261,6 +263,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
         public ActionResult Reserved(int? id)
         {
+            ViewBag.Title = "#" + id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
