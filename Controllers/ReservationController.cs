@@ -119,6 +119,28 @@ namespace MVCRestaurant27Tem2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+            //var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+            var rTable = db.RTable.FirstOrDefault(x => x.id_rtable == id);
+            var ReservationInDb = db.Reservation.FirstOrDefault(y => y.id_rtable == rTable.id_rtable);
+            ReservationHistory resHis = new ReservationHistory();
+            resHis.id_rtable = ReservationInDb.id_rtable;
+            resHis.rdatetime = ReservationInDb.rdatetime;
+            resHis.phone = ReservationInDb.phone;
+            resHis.rname = ReservationInDb.rname;
+            resHis.rsurname = ReservationInDb.rsurname;
+            db.ReservationHistory.Add(resHis);
+            db.SaveChanges();
+            db.Reservation.Remove(ReservationInDb);
+            db.SaveChanges();
+            //int Wid;
+            //Wid = userInDb.id_waiter;
+            rTable.tstatus = "f";
+            db.Entry(rTable).State = EntityState.Modified;
+            db.SaveChanges();
+            //ViewBag.Mesaj = "successfully created";
+            return RedirectToAction("Index");
+
+
             Reservation reservation = db.Reservation.Find(id);
             db.Reservation.Remove(reservation);
             db.SaveChanges();
