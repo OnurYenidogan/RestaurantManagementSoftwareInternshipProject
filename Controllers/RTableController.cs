@@ -284,29 +284,58 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reserved([Bind(Include = "id_rtable,tstatus")] RTable rTable)
+        public ActionResult Reserved(string submit, [Bind(Include = "id_rtable,tstatus")] RTable rTable)
         {
             if (ModelState.IsValid)
             {
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                int Wid;
                 var ReservationInDb = db.Reservation.FirstOrDefault(y => y.id_rtable == rTable.id_rtable);
                 ReservationHistory resHis = new ReservationHistory();
-                resHis.id_rtable = ReservationInDb.id_rtable;
-                resHis.rdatetime = ReservationInDb.rdatetime;
-                resHis.phone = ReservationInDb.phone;
-                resHis.rname = ReservationInDb.rname;
-                resHis.rsurname = ReservationInDb.rsurname;
-                db.ReservationHistory.Add(resHis);
-                db.SaveChanges();
-                db.Reservation.Remove(ReservationInDb);
-                db.SaveChanges();
-                int Wid;
-                Wid = userInDb.id_waiter;
-                rTable.tstatus = "f";
-                db.Entry(rTable).State = EntityState.Modified;
-                db.SaveChanges();
-                //ViewBag.Mesaj = "successfully created";
-                return RedirectToAction("Index");
+                switch (submit)
+                {
+                    case "Change the status to free":
+                        resHis.id_rtable = ReservationInDb.id_rtable;
+                        resHis.rdatetime = ReservationInDb.rdatetime;
+                        resHis.phone = ReservationInDb.phone;
+                        resHis.rname = ReservationInDb.rname;
+                        resHis.rsurname = ReservationInDb.rsurname;
+                        db.ReservationHistory.Add(resHis);
+                        db.SaveChanges();
+                        db.Reservation.Remove(ReservationInDb);
+                        db.SaveChanges();
+                        Wid = userInDb.id_waiter;
+                        rTable.tstatus = "f";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        //ViewBag.Mesaj = "successfully created";
+                        return RedirectToAction("Index");
+                    case "make seated":
+                        resHis.id_rtable = ReservationInDb.id_rtable;
+                        resHis.rdatetime = ReservationInDb.rdatetime;
+                        resHis.phone = ReservationInDb.phone;
+                        resHis.rname = ReservationInDb.rname;
+                        resHis.rsurname = ReservationInDb.rsurname;
+                        db.ReservationHistory.Add(resHis);
+                        db.SaveChanges();
+                        db.Reservation.Remove(ReservationInDb);
+                        db.SaveChanges();
+                        Wid = userInDb.id_waiter;
+                        Bill newbill = new Bill();
+                        newbill.id_rtable = rTable.id_rtable;
+                        newbill.id_waiter = Convert.ToInt32(Wid); /*for now anyway it assignes admin*/
+                        newbill.bdatetime = DateTime.Now;
+                        newbill.Bsum = 0;
+                        rTable.tstatus = "s";
+                        db.Entry(rTable).State = EntityState.Modified;
+                        db.SaveChanges();
+                        db.Bill.Add(newbill);
+                        db.SaveChanges();
+                        //ViewBag.Mesaj = "successfully created";
+                        return RedirectToAction("Index");
+
+                }
+
             }
             return View(rTable);
         }
