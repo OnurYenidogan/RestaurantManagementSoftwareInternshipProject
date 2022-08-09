@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.ROrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.odatetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bill.id_bill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodDrink.FDname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Waiter.Wnick)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.odatetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bill.id_bill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodDrink.FDname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Waiter.Wnick)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_order }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_order }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_order })
+        </td>
+    </tr>
+}
+
+</table>

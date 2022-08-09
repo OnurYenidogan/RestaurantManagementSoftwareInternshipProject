@@ -10,107 +10,120 @@ using MVCRestaurant27Tem2022.Models;
 
 namespace MVCRestaurant27Tem2022.Controllers
 {
-    public class fdTypeController : Controller
+    public class TwoModelROrderController : Controller
     {
         private RestaurantDBEntities db = new RestaurantDBEntities();
 
-        // GET: fdType
+        // GET: TwoModelROrder
         public ActionResult Index()
         {
-            return View(db.fdType.ToList());
+            var rOrder = db.ROrder.Include(r => r.Bill).Include(r => r.FoodDrink).Include(r => r.Waiter);
+            return View(rOrder.ToList());
         }
 
-        // GET: fdType/Details/5
+        // GET: TwoModelROrder/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fdType fdType = db.fdType.Find(id);
-            if (fdType == null)
+            ROrder rOrder = db.ROrder.Find(id);
+            if (rOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(fdType);
+            return View(rOrder);
         }
 
-        // GET: fdType/Create
+        // GET: TwoModelROrder/Create
         public ActionResult Create()
         {
+            ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill");
+            ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname");
+            ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick");
             return View();
         }
 
-        // POST: fdType/Create
+        // POST: TwoModelROrder/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_type,typeName")] fdType fdType)
+        public ActionResult Create([Bind(Include = "id_order,id_FD,id_bill,id_waiter,odatetime")] ROrder rOrder)
         {
             if (ModelState.IsValid)
             {
-                db.fdType.Add(fdType);
+                db.ROrder.Add(rOrder);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(fdType);
+            ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
+            ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);
+            ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
+            return View(rOrder);
         }
 
-        // GET: fdType/Edit/5
+        // GET: TwoModelROrder/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fdType fdType = db.fdType.Find(id);
-            if (fdType == null)
+            ROrder rOrder = db.ROrder.Find(id);
+            if (rOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(fdType);
+            ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
+            ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);
+            ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
+            return View(rOrder);
         }
 
-        // POST: fdType/Edit/5
+        // POST: TwoModelROrder/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_type,typeName")] fdType fdType)
+        public ActionResult Edit([Bind(Include = "id_order,id_FD,id_bill,id_waiter,odatetime")] ROrder rOrder)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(fdType).State = EntityState.Modified;
+                db.Entry(rOrder).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(fdType);
+            ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill", rOrder.id_bill);
+            ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);
+            ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
+            return View(rOrder);
         }
 
-        // GET: fdType/Delete/5
+        // GET: TwoModelROrder/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fdType fdType = db.fdType.Find(id);
-            if (fdType == null)
+            ROrder rOrder = db.ROrder.Find(id);
+            if (rOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(fdType);
+            return View(rOrder);
         }
 
-        // POST: fdType/Delete/5
+        // POST: TwoModelROrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            fdType fdType = db.fdType.Find(id);
-            db.fdType.Remove(fdType);
+            ROrder rOrder = db.ROrder.Find(id);
+            db.ROrder.Remove(rOrder);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

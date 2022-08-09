@@ -5,7 +5,8 @@
     }
     .tableStatusMain {
         margin: 1%;
-        float: right;
+        float: left;
+        width: 100%;
     }
     .tableStatus {
         border-radius: 10%;
@@ -17,6 +18,35 @@
         margin: 1%;
         text-align: center;
         position: relative;
+    }
+    @@media only screen and (max-width: 900px) {
+        .tableStatus {
+            width: 20%;
+            /*            margin-left: 2.5%;
+            margin-right: 2.5%;*/
+            margin: 2.5%
+        }
+    }
+
+    @@media only screen and (min-width: 1100px) {
+        .tableStatus {
+            width: 14.66%;
+            margin: 1%
+        }
+    }
+
+    @@media only screen and (min-width: 1300px) {
+        .tableStatus {
+            width: 11%;
+            margin: 0.7%
+        }
+    }
+
+    @@media only screen and (min-width: 1300px) {
+        .tableStatus {
+            width: 9.2%;
+            margin: 0.4%
+        }
     }
     .tableStatusFree {
         background-color: springgreen;
@@ -69,23 +99,23 @@
     <h2>Table Status</h2>
     <div class="tableStatusFree"></div>
     <p>
-        <h2>@Html.ActionLink("Create New", "TableCreate")</h2>
+        <h2>@Html.ActionLink("Create New", "TableCreate")</h2><span> <a style="color:red; font-size:20px; text-align:center;">You can only remove "Free" tables. Removed tables can be brought back too.</span></a>
     </p>
-    <div>
+    <div style="width = 100%">
         <div class="tableStatus tableStatusFree tableStatusInfo">
-            <h3><a >Free<span class="tableLink"></span></a></h3>
+            <h3><a>Free<span class="tableLink"></span></a></h3>
         </div>
         <div class="tableStatus tableStatusSeated tableStatusInfo">
-            <h3><a >Seated<span class="tableLink"></span></a></h3>
+            <h3><a>Seated<span class="tableLink"></span></a></h3>
         </div>
         <div class="tableStatus tableStatusReserved tableStatusInfo">
-            <h3><a >Reserved<span class="tableLink"></span></a></h3>
+            <h3><a>Reserved<span class="tableLink"></span></a></h3>
         </div>
         <div class="tableStatus tableStatusRemoved tableStatusInfo">
-            <h3><a >Removed<span class="tableLink"></span></a></h3>
+            <h3><a>Removed<span class="tableLink"></span></a></h3>
         </div>
-        <h2 style="color:red">You can only remove "Free" tables. Also, removed tables can be brought back</h2>
     </div>
+
     <div class="tableStatusMain">
         @{int i = 0;}
         @foreach (var item in Model)

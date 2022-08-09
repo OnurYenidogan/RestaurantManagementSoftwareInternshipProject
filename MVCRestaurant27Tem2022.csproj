@@ -142,6 +142,7 @@
     <Compile Include="Controllers\RTableController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\oldWaiterController.cs" />
+    <Compile Include="Controllers\TwoModelROrderController.cs" />
     <Compile Include="Controllers\WaiterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -255,8 +256,6 @@
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\oldWaiter\Index.cshtml" />
     <Content Include="Views\oldWaiter\Create.cshtml" />
-    <Content Include="Views\fdType\Index.cshtml" />
-    <Content Include="Views\fdType\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\denemeEdit.cshtml" />
@@ -309,6 +308,17 @@
     <Content Include="Views\ReservationHistory\Details.cshtml" />
     <Content Include="Views\ReservationHistory\Edit.cshtml" />
     <Content Include="Views\ReservationHistory\Index.cshtml" />
+    <Content Include="Views\fdType\Create.cshtml" />
+    <Content Include="Views\fdType\Delete.cshtml" />
+    <Content Include="Views\fdType\Details.cshtml" />
+    <Content Include="Views\fdType\Edit.cshtml" />
+    <Content Include="Views\fdType\Index.cshtml" />
+    <Content Include="Views\FoodDrink\oldIndex.cshtml" />
+    <Content Include="Views\TwoModelROrder\Create.cshtml" />
+    <Content Include="Views\TwoModelROrder\Delete.cshtml" />
+    <Content Include="Views\TwoModelROrder\Details.cshtml" />
+    <Content Include="Views\TwoModelROrder\Edit.cshtml" />
+    <Content Include="Views\TwoModelROrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
