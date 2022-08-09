@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.BillCompleted>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bill History";
 }
 
-<h2>Index</h2>
+<h2>Bill History</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Bsum)
+            @Html.Label("Bill Total)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.bdatetime)
+            @Html.Label("Date Time")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RTable.id_rtable)
+            @Html.Label("Table Number")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Waiter.Wnick)
+            @Html.Label("Waiter Name")
         </th>
         <th></th>
     </tr>
