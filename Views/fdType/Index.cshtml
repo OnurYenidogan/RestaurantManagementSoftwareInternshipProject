@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.fdType>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu Category";
 }
 
-<h2>Index</h2>
+<h2>Menu Category</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.typeName)
+            @Html.Label("Category")
         </th>
         <th></th>
     </tr>
@@ -24,8 +24,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id_type }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_type }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_type })
+            @Html.ActionLink("Details", "Details", new { id=item.id_type }) @*|
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_type })*@
         </td>
     </tr>
 }
