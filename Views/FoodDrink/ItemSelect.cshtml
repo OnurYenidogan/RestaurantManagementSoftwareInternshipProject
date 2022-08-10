@@ -114,7 +114,7 @@
 <div class="contentMain">
     @{ViewBag.Title = "Tables";}
     <h2>Table Status</h2>
-    <div class="tableStatusFree"></div>
+    @*<div class="tableStatusFree"></div>
     <div>
         <div class="tableStatus tableStatusFree tableStatusInfo">
             <h3><a>Free</a></h3>
@@ -124,7 +124,7 @@
         </div>
         <div class="tableStatus tableStatusReserved tableStatusInfo">
             <h3><a>Reserved</a></h3>
-        </div>
+        </div>*@
     </div>
     <div class="tableStatusMain">
         @*@{int i = 0;}*@
@@ -132,7 +132,7 @@
         {
 
                 <div class="tableStatus tableStatusFree">
-                    <h1><a href="@Url.Action( "Details", new { id = item.FDname })">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h1>
+                    <h3><a href="@Url.Action( "Details", new { id = item.FDname })">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
                 </div>
 
         }
