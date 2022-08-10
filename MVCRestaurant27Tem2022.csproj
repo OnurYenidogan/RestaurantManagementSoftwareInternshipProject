@@ -282,7 +282,6 @@
     <Content Include="Views\Waiter\Details.cshtml" />
     <Content Include="Views\Waiter\Edit.cshtml" />
     <Content Include="Views\Waiter\Index.cshtml" />
-    <Content Include="Views\ROrder\Create.cshtml" />
     <Content Include="Views\ROrder\Complete.cshtml" />
     <Content Include="Views\ROrder\Details.cshtml" />
     <Content Include="Views\ROrder\Edit.cshtml" />
@@ -319,6 +318,7 @@
     <Content Include="Views\TwoModelROrder\Details.cshtml" />
     <Content Include="Views\TwoModelROrder\Edit.cshtml" />
     <Content Include="Views\TwoModelROrder\Index.cshtml" />
+    <Content Include="Views\ROrder\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
