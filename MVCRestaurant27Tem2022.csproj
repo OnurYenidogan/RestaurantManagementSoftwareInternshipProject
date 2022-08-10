@@ -319,6 +319,7 @@
     <Content Include="Views\TwoModelROrder\Edit.cshtml" />
     <Content Include="Views\TwoModelROrder\Index.cshtml" />
     <Content Include="Views\ROrder\Create.cshtml" />
+    <Content Include="Views\FoodDrink\ItemSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

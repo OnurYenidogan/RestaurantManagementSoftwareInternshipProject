@@ -20,6 +20,11 @@ namespace MVCRestaurant27Tem2022.Controllers
             var foodDrink = db.FoodDrink.Include(f => f.fdType);
             return View(foodDrink.ToList());
         }
+        public ActionResult ItemSelect()
+        {
+            var foodDrink = db.FoodDrink.Include(f => f.fdType);
+            return View(foodDrink.ToList());
+        }
 
         // GET: FoodDrink/Details/5
         public ActionResult Details(long? id)
