@@ -22,7 +22,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
         public ActionResult ItemSelect()
         {
-            ViewBag.Title = "Table " + Session["Tableid"];
+            ViewBag.Title = "Table #" + Session["Tableid"];
             var foodDrink = db.FoodDrink.Include(f => f.fdType);
             return View(foodDrink.ToList());
         }

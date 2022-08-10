@@ -52,6 +52,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ROrder rOrder, string id , string id2, int numberOfOrders)
         {
+            ViewBag.Title = "Table " + Session["Tableid"];
             if (ModelState.IsValid)
             {
                 int idInt = Convert.ToInt32(id);
