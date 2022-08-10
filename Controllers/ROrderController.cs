@@ -37,8 +37,12 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
 
         // GET: ROrder/Create
-        public ActionResult Create()
+        public ActionResult Create(string id)
         {
+            ViewBag.Title = "Table " + Session["Tableid"];
+            int idInt = Convert.ToInt32(id);
+            var fdInDb = db.FoodDrink.FirstOrDefault(y => y.id_FD == idInt);
+            ViewBag.fdView = fdInDb.FDname;
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick");
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname");
             ViewBag.id_bill = new SelectList(db.Bill, "id_bill", "id_bill");
@@ -52,12 +56,13 @@ namespace MVCRestaurant27Tem2022.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ROrder rOrder, string id , string id2, int numberOfOrders)
         {
-            ViewBag.Title = "Table " + Session["Tableid"];
+            //
             if (ModelState.IsValid)
             {
                 int idInt = Convert.ToInt32(id);
                 int id2Int = Convert.ToInt32(id2);
                 var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == id2Int);
+
                 //var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
                 rOrder.id_bill = billInDb.id_bill;
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
