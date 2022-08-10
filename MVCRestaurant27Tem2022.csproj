@@ -320,6 +320,7 @@
     <Content Include="Views\TwoModelROrder\Index.cshtml" />
     <Content Include="Views\ROrder\Create.cshtml" />
     <Content Include="Views\FoodDrink\ItemSelect.cshtml" />
+    <Content Include="Views\ROrder\oldCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

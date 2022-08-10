@@ -223,7 +223,8 @@ namespace MVCRestaurant27Tem2022.Controllers
                 switch (submit)
                 {
                     case "order":
-                        return RedirectToAction("Create/"+ rTable.id_rtable,"ROrder");
+                        Session["tableid"] = rTable.id_rtable;
+                        return RedirectToAction("ItemSelect/"+ rTable.id_rtable,"FoodDrink");
                     case "Checkout":
                         var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
                         var orderInDb= db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);

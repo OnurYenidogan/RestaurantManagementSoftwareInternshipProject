@@ -50,14 +50,14 @@ namespace MVCRestaurant27Tem2022.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ROrder rOrder, string id, int numberOfOrders)
+        public ActionResult Create(ROrder rOrder, string id , string id2, int numberOfOrders)
         {
             if (ModelState.IsValid)
             {
-                
                 int idInt = Convert.ToInt32(id);
-                var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == idInt);
-                var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
+                int id2Int = Convert.ToInt32(id2);
+                var billInDb = db.Bill.FirstOrDefault(y => y.id_rtable == id2Int);
+                //var FoodInDb = db.FoodDrink.FirstOrDefault(z => z.id_FD == rOrder.id_FD);
                 rOrder.id_bill = billInDb.id_bill;
                 var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
                 int Wid;
@@ -65,6 +65,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 Wid = userInDb.id_waiter;
                 rOrder.id_waiter = Wid;
                 rOrder.odatetime = DateTime.Now;
+                rOrder.id_FD = idInt;
                 for (int i = 0; i < numberOfOrders; i++)
                 {
                     db.ROrder.Add(rOrder);
@@ -73,7 +74,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 //db.Entry(billInDb).State = EntityState.Modified;
                 db.SaveChanges();
                 //return RedirectToAction("Index");
-                return RedirectToAction("Create/" + id);
+                return RedirectToAction("ItemSelect/" + id, "FoodDrink");
             }
             ViewBag.id_waiter = new SelectList(db.Waiter, "id_waiter", "Wnick", rOrder.id_waiter);
             ViewBag.id_FD = new SelectList(db.FoodDrink, "id_FD", "FDname", rOrder.id_FD);

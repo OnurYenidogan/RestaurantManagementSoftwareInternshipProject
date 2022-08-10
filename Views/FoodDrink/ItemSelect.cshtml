@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.FoodDrink>
 <style>
+    body {
+        width: 98%;
+        margin: auto;
+    }
+
     .contentMain {
         float: left;
     }
@@ -105,40 +110,39 @@
         z-index: 1;
     }
 </style>
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
+
+
+
+<h2>Order (@ViewBag.Title)</h2>
 
 <div class="contentMain">
-    @{ViewBag.Title = "Tables";}
-    <h2>Table Status</h2>
+
+
     @*<div class="tableStatusFree"></div>
-    <div>
-        <div class="tableStatus tableStatusFree tableStatusInfo">
-            <h3><a>Free</a></h3>
-        </div>
-        <div class="tableStatus tableStatusSeated tableStatusInfo">
-            <h3><a>Seated</a></h3>
-        </div>
-        <div class="tableStatus tableStatusReserved tableStatusInfo">
-            <h3><a>Reserved</a></h3>
-        </div>*@
-    </div>
-    <div class="tableStatusMain">
-        @*@{int i = 0;}*@
-        @foreach (var item in Model)
-        {
-
-                <div class="tableStatus tableStatusFree">
-                    <h3><a href="@Url.Action( "Details", new { id = item.FDname })">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
-                </div>
-
-        }
-    </div>
+        <div>
+            <div class="tableStatus tableStatusFree tableStatusInfo">
+                <h3><a>Free</a></h3>
+            </div>
+            <div class="tableStatus tableStatusSeated tableStatusInfo">
+                <h3><a>Seated</a></h3>
+            </div>
+            <div class="tableStatus tableStatusReserved tableStatusInfo">
+                <h3><a>Reserved</a></h3>
+            </div>*@
 </div>
-<table class="table">
+<div class="tableStatusMain">
+    @*@{int i = 0;}*@
+    @foreach (var item in Model)
+    {
+        <div class="tableStatus tableStatusFree">
+            <h3><a href="@Url.Action( "Create/" + item.id_FD + "/" + Session["Tableid"] , "ROrder")">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
+        </div>
+
+    }
+</div>
+</div>
+<!--<table class="table">
     <tr>
         <th>
             @Html.Label("Name")
@@ -149,13 +153,12 @@
         <th>
             @Html.Label("Is in the menu")
         </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.fdType.typeName)*@
-            @Html.Label("Category")
+        <th>-->
+@*@Html.DisplayNameFor(model => model.fdType.typeName)*@
+<!--@Html.Label("Category")
         </th>
         <th></th>
     </tr>
-
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -178,4 +181,4 @@
     </tr>
 }
 
-</table>
+</table>-->
