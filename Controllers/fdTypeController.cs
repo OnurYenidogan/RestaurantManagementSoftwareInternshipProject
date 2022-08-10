@@ -19,6 +19,10 @@ namespace MVCRestaurant27Tem2022.Controllers
         {
             return View(db.fdType.ToList());
         }
+        public ActionResult TypeSelect()
+        {
+            return View(db.fdType.ToList());
+        }
 
         // GET: fdType/Details/5
         public ActionResult Details(int? id)
