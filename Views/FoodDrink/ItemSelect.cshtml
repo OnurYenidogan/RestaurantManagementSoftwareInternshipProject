@@ -9,15 +9,15 @@
         float: left;
     }
 
-    .tableStatusMain {
+    .MenuItemMain {
         margin: 1%;
         float: left;
         width: 100%;
     }
 
-    .tableStatus {
+    .MenuItem {
         border-radius: 10%;
-        background-color: greenyellow;
+        background-color: rgb(255 209 137);
         float: left;
         width: 14%;
         padding: 10px;
@@ -26,9 +26,12 @@
         text-align: center;
         position: relative;
     }
+        .MenuItem a {
+            color: lightseagreen;
+        }
 
     @@media only screen and (max-width: 900px) {
-        .tableStatus {
+        .MenuItem {
             width: 90%;
             /*            margin-left: 2.5%;
             margin-right: 2.5%;*/
@@ -38,21 +41,21 @@
     }
 
     @@media only screen and (min-width: 901px) {
-        .tableStatus {
+        .MenuItem {
             width: 46%;
             margin-left: 2%;
             margin-right: 2%
         }
     }
     @@media only screen and (min-width: 1150px) {
-        .tableStatus {
+        .MenuItem {
             width: 30%;
             margin-left: 1.5%;
             margin-right: 1.5%
         }
     }
     @@media only screen and (min-width: 1300px) {
-        .tableStatus {
+        .MenuItem {
             width: 23%;
             margin-left: 1%;
             margin-right: 1%
@@ -67,35 +70,35 @@
         }
     }
 
-    .tableStatusFree {
+    .MenuItemFree {
         background-color: springgreen;
     }
 
-        .tableStatusFree a {
+        .MenuItemFree a {
             /*color:red;*/
             color: lightseagreen;
         }
 
-    .tableStatusSeated a {
+    .MenuItemSeated a {
         color: midnightblue;
     }
 
-    .tableStatusSeated {
+    .MenuItemSeated {
         /*background-color: rgb(42, 0, 181);*/
         background-color: royalblue;
         /*color: black;*/
     }
 
-    .tableStatusReserved {
+    .MenuItemReserved {
         background-color: rgb(235, 158, 52);
         color: dimgray;
     }
 
-        .tableStatusReserved a {
+        .MenuItemReserved a {
             color: dimgray;
         }
 
-    .tableStatusInfo {
+    .MenuItemInfo {
         float: left;
         height: 65px;
         margin: 1%;
@@ -121,23 +124,23 @@
 <div class="contentMain">
 
 
-    @*<div class="tableStatusFree"></div>
+    @*<div class="MenuItemFree"></div>
         <div>
-            <div class="tableStatus tableStatusFree tableStatusInfo">
+            <div class="MenuItem MenuItemFree MenuItemInfo">
                 <h3><a>Free</a></h3>
             </div>
-            <div class="tableStatus tableStatusSeated tableStatusInfo">
+            <div class="MenuItem MenuItemSeated MenuItemInfo">
                 <h3><a>Seated</a></h3>
             </div>
-            <div class="tableStatus tableStatusReserved tableStatusInfo">
+            <div class="MenuItem MenuItemReserved MenuItemInfo">
                 <h3><a>Reserved</a></h3>
             </div>*@
 </div>
-<div class="tableStatusMain">
+<div class="MenuItemMain">
     @*@{int i = 0;}*@
     @foreach (var item in Model)
     {
-        <div class="tableStatus tableStatusFree">
+        <div class="MenuItem">
             <h3><a href="@Url.Action( "Create/" + item.id_FD + "/" + Session["Tableid"] , "ROrder")">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
         </div>
 
