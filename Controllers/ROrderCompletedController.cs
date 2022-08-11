@@ -123,5 +123,84 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Seated(int? id)
+        {
+            ViewBag.Title = "#" + id;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RTable rTable = db.RTable.Find(id);
+            if (rTable == null)
+            {
+                return HttpNotFound();
+            }
+            else if (rTable.tstatus == "x")
+            {
+                return RedirectToAction("Removed/" + rTable.id_rtable);
+            }
+            var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
+            Session["billId"] = billInDb.id_bill;
+            ViewBag.BillSum = Convert.ToDecimal(billInDb.Bsum) + "₺";
+            var orderInDb = db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);
+            if (orderInDb != null)
+            {
+                ViewBag.Error = "Before checkout there shouldn't be any incomplete order. Complete or cancel any incomplete order for this table before checkout.";
+            }
+
+            return View(db.ROrderCompleted.ToList());
+        }
+        // POST: RTable/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Seated(string submit,  int id)
+        {
+            if (ModelState.IsValid)
+            {
+                switch (submit)
+                {
+                    case "order":
+                        Session["tableid"] = id;
+                        return RedirectToAction("ItemSelect/" + id, "FoodDrink");
+                    case "Checkout":
+                        var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == id);
+                        var tableInDb = db.RTable.FirstOrDefault(x => x.id_rtable == id);
+                        var orderInDb = db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);
+                        if (orderInDb == null)
+                        {
+                            var userInDb = db.Waiter.FirstOrDefault(x => x.Wnick == User.Identity.Name);
+                            int Wid;
+                            Wid = userInDb.id_waiter;
+                            //FoodDrink foodDrink = db.FoodDrink.Find(id);
+                            tableInDb.tstatus = "f";
+                            BillCompleted newbillComp = new BillCompleted();
+                            newbillComp.Bsum = billInDb.Bsum;
+                            newbillComp.id_rtable = billInDb.id_rtable;
+                            newbillComp.id_waiter = billInDb.id_waiter;
+                            newbillComp.bdatetime = billInDb.bdatetime;
+                            int dltID = Convert.ToInt32(billInDb.id_bill);
+                            Bill deletebill = db.Bill.Find(dltID);
+                            db.Bill.Remove(deletebill);
+                            db.SaveChanges();
+                            //billInDb.ispaid = true;
+                            db.BillCompleted.Add(newbillComp);
+                            db.Entry(tableInDb).State = EntityState.Modified;
+                            //db.Entry(billInDb).State = EntityState.Modified;
+                            db.SaveChanges();
+                            //billInDb = await db.ROrder.FindAsync(id);
+                            //await db.SaveChangesAsync();
+                            //ViewBag.Mesaj = "successfully created";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Seated/" + tableInDb.id_rtable);
+                        }
+                }
+            }
+            return View();
+        }
     }
 }

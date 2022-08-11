@@ -36,7 +36,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                 return RedirectToAction("Free/"+ rTable.id_rtable);
             }
             else if(Convert.ToString(rTable.tstatus) == "s"){
-                return RedirectToAction("Seated/" + rTable.id_rtable);
+                return RedirectToAction("Seated/" + rTable.id_rtable,"ROrderCompleted");
             }
             else if (Convert.ToString(rTable.tstatus) == "r")
             {

@@ -265,7 +265,7 @@
     <Content Include="Views\RTable\Edit.cshtml" />
     <Content Include="Views\RTable\Index.cshtml" />
     <Content Include="Views\RTable\Free.cshtml" />
-    <Content Include="Views\RTable\Seated.cshtml" />
+    <Content Include="Views\RTable\oldSeated.cshtml" />
     <Content Include="Views\FoodDrink\Create.cshtml" />
     <Content Include="Views\FoodDrink\Delete.cshtml" />
     <Content Include="Views\FoodDrink\Details.cshtml" />
@@ -322,6 +322,7 @@
     <Content Include="Views\FoodDrink\ItemSelect.cshtml" />
     <Content Include="Views\ROrder\oldCreate.cshtml" />
     <Content Include="Views\fdType\TypeSelect.cshtml" />
+    <Content Include="Views\ROrderCompleted\Seated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
