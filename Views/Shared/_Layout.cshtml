@@ -7,6 +7,31 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 <style>
+    .table {
+        font-size: 25px;
+    }
+
+    @@media only screen and (max-width: 600px) {
+        .table {
+            font-size: 13px;
+        }
+    }
+    @@media only screen and (min-width: 601px) {
+        .table {
+            font-size: 15px;
+        }
+    }
+    @@media only screen and (min-width: 801px) {
+        .table {
+            font-size: 18px;
+        }
+    }
+    @@media only screen and (min-width: 1400px) {
+        .table {
+            font-size: 25px;
+        }
+    }
+
     .container {
         margin-right: 2%;
         margin-left: 2%;
