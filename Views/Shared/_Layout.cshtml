@@ -28,7 +28,7 @@
     }
     @@media only screen and (min-width: 1400px) {
         .table {
-            font-size: 25px;
+            font-size: 23px;
         }
     }
 
@@ -78,7 +78,10 @@
                     @*<li>@Html.ActionLink("FD Manage", "Index", "FoodDrink")</li>*@
                     <li>@Html.ActionLink("Reservation", "Index", "Reservation")</li>
                     <li>@Html.ActionLink("ROrder", "Index", "ROrder")</li>
-                    <li>@Html.ActionLink("Admin Panel", "Index", "AdminPanel")</li>
+                    @if (User.Identity.Name == "admin")
+                    {
+                        <li>@Html.ActionLink("Admin Panel", "Index", "AdminPanel")</li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
