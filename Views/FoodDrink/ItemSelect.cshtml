@@ -158,16 +158,17 @@
         @foreach (var item in Model)
         {
 
-            if (j == 0)
+            <!--if (j == 0 && item.id_type == i)
             {
-                <div class="spacerctgr"> <h4> @*@item.fdType.typeName*@ Category #@i</h4> </div>
-            }
+                <div class="spacerctgr"> <h4>@Html.DisplayFor(modelItem => item.fdType.typeName)--> @*@item.fdType.typeName*@ <!--Category #@i</h4> </div>
+            }-->
             j++;
             if (item.id_type == i)
             {
-                <div class="MenuItem">
-                    <h3><a href="@Url.Action( "Create/" + item.id_FD + "/" + Session["Tableid"] , "ROrder")">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
-                </div>
+    <div class="MenuItem">
+        <h3><a href="@Url.Action( "Create/" + item.id_FD + "/" + Session["Tableid"] , "ROrder")">@Html.DisplayFor(modelItem => item.FDname)<span class="tableLink"></span></a></h3>
+        <div class="spacerctgr"> <h4>@Html.DisplayFor(modelItem => item.fdType.typeName) @*@item.fdType.typeName*@ Category #@i</h4> </div>
+    </div>
 
             }
         }
