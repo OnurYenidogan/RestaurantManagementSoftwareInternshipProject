@@ -192,7 +192,7 @@ namespace MVCRestaurant27Tem2022.Controllers
                             //billInDb = await db.ROrder.FindAsync(id);
                             //await db.SaveChangesAsync();
                             //ViewBag.Mesaj = "successfully created";
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Index","RTable");
                         }
                         else
                         {
