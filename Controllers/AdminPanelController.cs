@@ -44,6 +44,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
         public ActionResult FreeTable(int? id)
         {
+            ViewBag.Title = "Table #" + id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -78,6 +79,7 @@ namespace MVCRestaurant27Tem2022.Controllers
         }
         public ActionResult RemovedTable(int? id)
         {
+            ViewBag.Title = "Table #" + id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
