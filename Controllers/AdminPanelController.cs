@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace MVCRestaurant27Tem2022.Controllers
 {
+    [Authorize(Users = "admin")]
     public class AdminPanelController : Controller
     {
         private RestaurantDBEntities db = new RestaurantDBEntities();
