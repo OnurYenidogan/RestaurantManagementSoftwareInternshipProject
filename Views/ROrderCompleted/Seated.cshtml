@@ -44,7 +44,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_FD)
+            @Html.DisplayNameFor(model => model.FoodDrink.FDname)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.id_bill)
@@ -55,6 +55,9 @@
         <th>
             @Html.DisplayNameFor(model => model.odatetime)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodDrink.price)
+        </th>
         <th></th>
     </tr>
 
@@ -62,25 +65,28 @@
     {
         if (item.id_bill == Convert.ToInt64(Session["billId"]))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_FD)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_bill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_waiter)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.odatetime)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_order }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
-                </td>
-            </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FoodDrink.FDname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.id_bill)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.id_waiter)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.odatetime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FoodDrink.price)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id_order }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id_order }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id_order })
+    </td>
+</tr>
         }
 
     }
