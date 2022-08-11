@@ -1,27 +1,24 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.ROrderCompleted>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Order History";
 }
 
-<h2>Index</h2>
+<h2>Order History</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_FD)
+            @Html.Label("Menu Item")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.id_bill)
+            @Html.Label("Bill ID")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.id_waiter)
+            @Html.Label("Waiter ID")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.odatetime)
+            @Html.Label("Date Time")
         </th>
         <th></th>
     </tr>
@@ -29,7 +26,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.id_FD)
+            @Html.DisplayFor(modelItem => item.FoodDrink.FDname)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.id_bill)

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVCRestaurant27Tem2022.Models.ReservationHistory>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservation History";
 }
 
-<h2>Index</h2>
+<h2>Reservation History</h2>
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_rtable)
+            @Html.Label("Table No")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rdatetime)
+            @Html.Label("Date Time")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.Label("Phone")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rname)
+            @Html.Label("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.rsurname)
+            @Html.Label("Surname")
         </th>
         <th></th>
     </tr>
