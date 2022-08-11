@@ -58,8 +58,16 @@ namespace MVCRestaurant27Tem2022.Controllers
                 tableInDb.tstatus = "r";
                 db.Reservation.Add(reservation);
                 db.Entry(tableInDb).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if(reservation.rdatetime != null && reservation.rname != null && reservation.rsurname != null && reservation.id_rtable != null && reservation.phone != null)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Error = "All fields must be filled in";
+                }
+
             }
 
             ViewBag.id_rtable = new SelectList(db.RTable, "id_rtable", "tstatus", reservation.id_rtable);
