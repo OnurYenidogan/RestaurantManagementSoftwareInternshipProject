@@ -141,7 +141,9 @@ namespace MVCRestaurant27Tem2022.Controllers
             }
             var billInDb = db.Bill.FirstOrDefault(x => x.id_rtable == rTable.id_rtable);
             Session["billId"] = billInDb.id_bill;
-            ViewBag.BillSum = Convert.ToDecimal(billInDb.Bsum) + "₺";
+            decimal sum = billInDb.Bsum;
+            sum = Math.Round(sum, 2);
+            ViewBag.BillSum = sum + "₺";
             var orderInDb = db.ROrder.FirstOrDefault(a => a.id_bill == billInDb.id_bill);
             if (orderInDb != null)
             {

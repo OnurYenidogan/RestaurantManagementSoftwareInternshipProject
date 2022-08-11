@@ -13,9 +13,9 @@
                 @*@Html.ValidationMessageFor(model => model.tstatus, "", new { @class = "text-danger" })*@
             </div>
         </div>
-        @ViewBag.BillSum
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <h2>Bill Total @ViewBag.BillSum</h2><br />
                 <h2 style="color:darkred">@ViewBag.Error</h2><br />
                 <input type="submit" name="submit" value="Checkout" class="btn btn-default" />
                 <input type="submit" name="submit" value="order" class="btn btn-default" />
